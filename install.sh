@@ -21,6 +21,8 @@ brew install  \
     zsh \
     zsh-completions
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install 10
 
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
