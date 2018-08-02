@@ -17,9 +17,17 @@ brew cask install \
 
 brew install  \
     coreutils \
+    rbenv \
     zsh \
     zsh-completions
-    
+
+# RUBY + BUNDLER
+brew install rbenv
+eval "$(rbenv init -)"
+rbenv install $(rbenv install -l | grep -v - | tail -1)
+rbenv global $(rbenv install -l | grep -v - | tail -1)
+gem install bundler
+
 brew install yarn --without-node
 
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
