@@ -11,12 +11,17 @@ brew cask install \
     spotify \
     wavebox \
     jdownloader \
-    firefox
+    firefox \
+    java \
+    android-studio
 
 brew install  \
     coreutils \
+    nvm \
     zsh \
     zsh-completions
+
+nvm install 10
 
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
     ssh-keygen

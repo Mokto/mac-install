@@ -19,3 +19,8 @@ POWERLEVEL9K_DISABLE_RPROMPT=true
 cat ~/.env | while read line; do
     export $line
 done
+
+alias current_branch='git rev-parse --abbrev-ref HEAD'
+alias gmergebase='git merge-base origin/develop $(current_branch)'
+alias gr='git rebase -i $(gmergebase)'
+alias gp='git push -u origin $(current_branch)'
