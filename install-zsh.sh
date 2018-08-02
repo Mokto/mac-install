@@ -23,3 +23,4 @@ ln -s ~/.zprezto/modules/prompt/external/powerlevel9k/powerlevel9k.zsh-theme ~/.
 # install zsh config files
 cp -f ./.zpreztorc ~/.zpreztorc
 cp -f ./.zshrc ~/.zshrc
+cp -f ./.env ~/.env

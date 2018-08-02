@@ -16,3 +16,6 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 POWERLEVEL9K_DISABLE_RPROMPT=true
 
+cat ~/.env | while read line; do
+    export $line
+done

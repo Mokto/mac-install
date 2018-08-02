@@ -9,6 +9,8 @@ brew cask install \
     iterm2 \
     slack \
     spotify \
+    wavebox \
+    jdownloader \
     firefox
 
 brew install  \
