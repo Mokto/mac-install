@@ -13,6 +13,7 @@ brew cask install \
     jdownloader \
     firefox \
     java \
+    docker \
     android-studio
 
 brew install  \
