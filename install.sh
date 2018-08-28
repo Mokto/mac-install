@@ -14,7 +14,10 @@ brew cask install \
     firefox \
     java \
     docker \
-    android-studio
+    android-studio \
+    the-unarchiver \
+    vlc
+
 
 brew install  \
     coreutils \
