@@ -31,6 +31,8 @@ eval "$(rbenv init -)"
 rbenv install $(rbenv install -l | grep -v - | tail -1)
 rbenv global $(rbenv install -l | grep -v - | tail -1)
 gem install bundler
+gem install cocoapods
+pod setup
 
 brew install yarn --without-node
 
@@ -49,3 +51,5 @@ if [ ! -f ~/.ssh/id_rsa.pub ]; then
     echo '----PUBLIC KEY----'
     echo '------------------'
 fi
+
+./mac-settings.sh
