@@ -7,15 +7,16 @@ brew cask install \
     google-chrome \
     visual-studio-code \
     iterm2 \
-    slack \
+    # slack \
     spotify \
-    wavebox \
+    # wavebox \
     jdownloader \
     firefox \
     java \
     docker \
     android-studio \
     the-unarchiver \
+    rambox \
     vlc
 
 
