@@ -28,3 +28,8 @@ alias current_branch='git rev-parse --abbrev-ref HEAD'
 alias gmergebase='git merge-base origin/develop $(current_branch)'
 alias gr='git rebase -i $(gmergebase)'
 alias gp='git push -u origin $(current_branch)'
+
+createVaultUser () {
+  vault write auth/userpass/users/$1 \
+    password=$2
+}
