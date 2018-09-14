@@ -1,1 +1,5 @@
-https://github.com/bhilburn/powerlevel9k/wiki/Show-Off-Your-Config#cvuorinens-configuration
+$ANDROID_HOME/tools/bin/sdkmanager --licenses
+
+# display list of GPG keys
+gpg --list-secret-keys --keyid-format LONG
+gpg --armor --export $GPGKEY
