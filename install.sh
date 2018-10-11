@@ -39,6 +39,14 @@ gem install cocoapods
 gem install fastlane -NV
 pod setup
 
+# AWS cli
+ curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+ unzip awscli-bundle.zip
+ rm -f awscli-bundle.zip
+ sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+ rm -rf ./awscli-bundle
+
+
 brew install yarn --without-node
 
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
