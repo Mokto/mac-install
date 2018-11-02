@@ -17,7 +17,10 @@ brew cask install \
     android-studio \
     the-unarchiver \
     rambox \
-    vlc
+    vlc \
+    plex-media-server \
+    plex-media-player \
+    insomnia
 
 brew tap wix/brew
 
