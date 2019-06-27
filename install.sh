@@ -7,22 +7,20 @@ brew cask install \
     google-chrome \
     visual-studio-code \
     iterm2 \
-    # slack \
+    slack \
     spotify \
-    # wavebox \
-    jdownloader \
     firefox \
     java \
     docker \
-    android-studio \
-    the-unarchiver \
     rambox \
     vlc \
-    plex-media-server \
     plex-media-player \
-    insomnia
+    insomnia \
+    telegram \
+    gpg
 
-brew tap wix/brew
+brew tap homebrew/cask-drivers
+brew cask install logitech-options
 
 brew install  \
     coreutils \
@@ -30,7 +28,10 @@ brew install  \
     zsh \
     gpg \
     zsh-completions \
-    applesimutils
+    awscli
+
+brew tap homebrew/cask-fonts
+brew cask install font-hack-nerd-font
 
 # RUBY + BUNDLER
 brew install rbenv
@@ -40,22 +41,11 @@ rbenv global $(rbenv install -l | grep -v - | tail -1)
 gem install bundler
 gem install cocoapods
 gem install fastlane -NV
-pod setup
 
-# AWS cli
- curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
- unzip awscli-bundle.zip
- rm -f awscli-bundle.zip
- sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
- rm -rf ./awscli-bundle
-
-
-brew install yarn --without-node
-
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-nvm install 10
+nvm install 12
 
 ./mac-settings.sh
 
@@ -72,3 +62,7 @@ if [ ! -f ~/.ssh/id_rsa.pub ]; then
     echo '----PUBLIC KEY SSH----'
     echo '----------------------'
 fi
+
+
+# pod setup
+#Hack Nerd Font
