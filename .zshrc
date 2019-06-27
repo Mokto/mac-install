@@ -13,7 +13,6 @@ eval "$(rbenv init -)"
 
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
-export GPG_TTY=$(tty)
 
 # Customize to your needs...
 # https://github.com/bhilburn/powerlevel9k#customizing-prompt-segments
@@ -29,8 +28,22 @@ alias current_branch='git rev-parse --abbrev-ref HEAD'
 alias gmergebase='git merge-base origin/develop $(current_branch)'
 alias gr='git rebase -i $(gmergebase)'
 alias gp='git push -u origin $(current_branch)'
-
-createVaultUser () {
-  vault write auth/userpass/users/$1 \
-    password=$2
+export GPG_TTY=$(tty)
+function glog () {
+    git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
 }
+
+function gc () {
+    local message=$@
+    if [ -z "${message// }" ]
+        then echo "Commit message missing"
+    else
+      # echo "git commit -am '$message'"
+      git commit -a -m "$message"
+    fi
+}
+
+# createVaultUser () {
+#   vault write auth/userpass/users/$1 \
+#     password=$2
+# }

@@ -18,6 +18,7 @@ brew cask install \
     insomnia \
     telegram \
     gpg \
+    gpg-suite \
     ukelele
 
 brew tap homebrew/cask-drivers
@@ -27,7 +28,6 @@ brew install  \
     coreutils \
     rbenv \
     zsh \
-    gpg \
     zsh-completions \
     vault \
     awscli \
