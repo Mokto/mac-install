@@ -13,6 +13,7 @@ eval "$(rbenv init -)"
 
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
+export GPG_TTY=$(tty)
 
 # Customize to your needs...
 # https://github.com/bhilburn/powerlevel9k#customizing-prompt-segments
