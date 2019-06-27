@@ -24,22 +24,24 @@ cat ~/.env | while read line; do
     export $line
 done
 
+export GPG_TTY=$(tty)
+
 alias current_branch='git rev-parse --abbrev-ref HEAD'
 alias gmergebase='git merge-base origin/develop $(current_branch)'
-alias gr='git rebase -i $(gmergebase)'
+alias gs='git rebase -i $(gmergebase)'
 alias gp='git push -u origin $(current_branch)'
-export GPG_TTY=$(tty)
+alias gr='git fetch origin && git rebase origin/develop'
+
 function glog () {
     git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
 }
-
 function gc () {
     local message=$@
     if [ -z "${message// }" ]
         then echo "Commit message missing"
     else
       # echo "git commit -am '$message'"
-      git commit -a -m "$message"
+      git commit -m "$message"
     fi
 }
 
