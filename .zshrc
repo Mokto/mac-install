@@ -31,17 +31,29 @@ alias gmergebase='git merge-base origin/develop $(current_branch)'
 alias gs='git rebase -i $(gmergebase)'
 alias gp='git push -u origin $(current_branch)'
 alias gr='git fetch origin && git rebase origin/develop'
+alias gc='git checkout' 
 
 function glog () {
     git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
 }
-function gc () {
+function gco () {
     local message=$@
     if [ -z "${message// }" ]
         then echo "Commit message missing"
     else
       # echo "git commit -am '$message'"
       git commit -m "$message"
+    fi
+}
+function gb () {
+    local branch=$@
+    if [ -z "${branch// }" ]
+        then echo "Branch name missing"
+    else
+      git checkout develop
+      git fetch origin
+      git reset --hard origin/develop
+      git checkout -b "$branch"
     fi
 }
 

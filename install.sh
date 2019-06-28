@@ -17,9 +17,8 @@ brew cask install \
     plex-media-player \
     insomnia \
     telegram \
-    gpg \
     gpg-suite \
-    ukelele
+    robo-3t
 
 brew tap homebrew/cask-drivers
 brew cask install logitech-options
@@ -32,7 +31,8 @@ brew install  \
     vault \
     awscli \
     kubernetes-cli \
-    kubernetes-helm
+    kubernetes-helm \
+    go
 
 brew tap homebrew/cask-fonts
 brew cask install font-hack-nerd-font
