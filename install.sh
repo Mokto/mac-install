@@ -68,5 +68,4 @@ if [ ! -f ~/.ssh/id_rsa.pub ]; then
 fi
 
 
-# pod setup
-#Hack Nerd Font
+pod setup
