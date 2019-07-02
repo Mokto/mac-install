@@ -18,7 +18,8 @@ brew cask install \
     insomnia \
     telegram \
     gpg-suite \
-    robo-3t
+    robo-3t \
+    ngrok
 
 brew tap homebrew/cask-drivers
 brew cask install logitech-options
