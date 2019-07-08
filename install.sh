@@ -19,7 +19,8 @@ brew cask install \
     telegram \
     gpg-suite \
     robo-3t \
-    ngrok
+    ngrok \
+    postman
 
 brew tap homebrew/cask-drivers
 brew cask install logitech-options
