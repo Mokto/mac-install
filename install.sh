@@ -1,13 +1,9 @@
 #!/bin/bash
 
-# install 1password
-# install xcode
-
 brew cask install \
     1password \
     google-chrome \
     visual-studio-code \
-    iterm2 \
     slack \
     spotify \
     firefox \
@@ -23,14 +19,14 @@ brew cask install \
     ngrok \
     postman
 
+cp confs/vscode.json ~/Library/Application\ Support/Code/User/settings.json
+
 brew tap homebrew/cask-drivers
 brew cask install logitech-options
 
 brew install  \
     coreutils \
     rbenv \
-    zsh \
-    zsh-completions \
     vault \
     awscli \
     kubernetes-cli \
@@ -54,7 +50,19 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install 12
 
-./mac-settings.sh
+./utils/mac-settings.sh
+
+echo "Git name ?"
+read name
+
+echo "Git email ?"
+read email
+
+
+git config --global user.email $email
+git config --global user.name "$name" 
+echo "Done"
+
 
 
 gpg --full-generate-key
