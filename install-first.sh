@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo spctl --master-disable
+
 brew install \
     zsh \
     1password \
