@@ -2,6 +2,8 @@
 
 brew install \
     zsh \
+    1password \
+    google-chrome \
     zsh-completions
 
 brew cask install iterm2   visual-studio-code
