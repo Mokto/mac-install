@@ -318,4 +318,15 @@ for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
 
-#python dock-icon-remove.py -r "/Applications/Notes.app"
+python utils/dock-icon-remove.py -r "/Applications/Launchpad.app"
+python utils/dock-icon-remove.py -r "/Applications/Siri.app"
+python utils/dock-icon-remove.py -r "/Applications/Safari.app"
+python utils/dock-icon-remove.py -r "/Applications/Mail.app"
+python utils/dock-icon-remove.py -r "/Applications/Contacts.app"
+python utils/dock-icon-remove.py -r "/Applications/Calendar.app"
+python utils/dock-icon-remove.py -r "/Applications/Reminders.app"
+python utils/dock-icon-remove.py -r "/Applications/Maps.app"
+python utils/dock-icon-remove.py -r "/Applications/Photos.app"
+python utils/dock-icon-remove.py -r "/Applications/FaceTime.app"
+python utils/dock-icon-remove.py -r "/Applications/iTunes.app"
+python utils/dock-icon-remove.py -r "/Applications/App Store.app"
