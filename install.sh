@@ -58,6 +58,8 @@ nvm install 12
 
 
 gpg --full-generate-key
+git config --global gpg.program /usr/local/MacGPG2/bin/gpg2
+git config --global commit.gpgsign true 
 
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
     ssh-keygen

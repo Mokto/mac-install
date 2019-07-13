@@ -8,3 +8,4 @@ Install karabiner
 
 git config --global user.email XXX@YYY
 git config --global user.name "XXXX" 
+git config --global user.signingkey XXXX 
