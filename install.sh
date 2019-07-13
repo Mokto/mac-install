@@ -3,7 +3,6 @@
 brew cask install \
     1password \
     google-chrome \
-    visual-studio-code \
     slack \
     spotify \
     firefox \
@@ -18,8 +17,6 @@ brew cask install \
     robo-3t \
     ngrok \
     postman
-
-cp confs/vscode.json ~/Library/Application\ Support/Code/User/settings.json
 
 brew tap homebrew/cask-drivers
 brew cask install logitech-options
