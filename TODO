@@ -5,3 +5,6 @@ gpg --list-secret-keys --keyid-format LONG
 gpg --armor --export $GPGKEY
 
 Install karabiner
+
+git config --global user.email XXX@YYY
+git config --global user.name "XXXX" 
