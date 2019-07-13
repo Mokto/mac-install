@@ -4,6 +4,7 @@
 # install xcode
 
 brew cask install \
+    1password \
     google-chrome \
     visual-studio-code \
     iterm2 \
