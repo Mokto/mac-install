@@ -36,6 +36,7 @@ brew cask install \
     gpg-suite \
     robo-3t \
     ngrok \
+    whatsapp \
     postman
 
 brew tap homebrew/cask-drivers
@@ -48,6 +49,7 @@ brew install  \
     awscli \
     kubernetes-cli \
     kubernetes-helm \
+    mongodb \
     go
 
 # RUBY + BUNDLER
