@@ -37,7 +37,8 @@ brew cask install \
     robo-3t \
     ngrok \
     whatsapp \
-    postman
+    postman \
+    karabiner-elements
 
 brew tap homebrew/cask-drivers
 brew cask install logitech-options
