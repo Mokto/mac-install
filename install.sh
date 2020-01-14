@@ -71,3 +71,11 @@ nvm install 12
 
 
 pod setup
+
+
+#eksctl
+
+brew tap weaveworks/tap
+brew install weaveworks/tap/eksctl
+mkdir -p ~/.zsh/completion/
+eksctl completion zsh > ~/.zsh/completion/_eksctl
