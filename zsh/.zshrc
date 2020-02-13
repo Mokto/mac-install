@@ -61,3 +61,5 @@ function gb () {
 #   vault write auth/userpass/users/$1 \
 #     password=$2
 # }
+source '$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+source '$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'

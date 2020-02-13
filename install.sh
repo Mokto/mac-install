@@ -42,6 +42,7 @@ brew cask install \
 
 brew tap homebrew/cask-drivers
 brew cask install logitech-options
+brew cask install google-cloud-sdk
 
 brew install  \
     coreutils \
