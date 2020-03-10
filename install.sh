@@ -80,3 +80,7 @@ brew tap weaveworks/tap
 brew install weaveworks/tap/eksctl
 mkdir -p ~/.zsh/completion/
 eksctl completion zsh > ~/.zsh/completion/_eksctl
+
+
+npm install -g rebase-editor
+git config --global sequence.editor rebase-editor
