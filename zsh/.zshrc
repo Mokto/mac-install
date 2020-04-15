@@ -26,12 +26,12 @@ done
 
 export GPG_TTY=$(tty)
 
-alias default_branch='git remote show origin | grep "HEAD branch" | cut -d ":" -f 2 | sed -e "s/^[[:space:]]*//"'
+alias default_branch='git branch -r | grep  "HEAD -> " | sed -e "s/^[[:space:]]*//"  | sed -e "s/^origin\/HEAD -> origin\///" | sed -e "s/^[[:space:]]*//"'
 alias current_branch='git rev-parse --abbrev-ref HEAD'
 alias gmergebase='git merge-base origin/$(default_branch) $(current_branch)'
 alias gs='git rebase -i $(gmergebase)'
 alias gp='git push -u origin $(current_branch)'
-alias gr='git fetch origin && git rebase origin/develop'
+alias gr='git fetch origin && git rebase origin/$(default_branch)'
 alias gc='git checkout' 
 
 function glog () {
