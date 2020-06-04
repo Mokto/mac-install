@@ -289,6 +289,11 @@ defaults write com.apple.terminal StringEncodings -array 4
 # Donâ€™t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
+defaults write com.apple.universalaccess reduceTransparency 1
+
+mkdir -p ~/Projects
+touch ~/Projects/.metadata_never_index
+
 ###############################################################################
 # Activity Monitor                                                            #
 ###############################################################################
