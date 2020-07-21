@@ -33,6 +33,7 @@ alias gs='git rebase -i $(gmergebase)'
 alias gp='git push -u origin $(current_branch)'
 alias gr='git fetch origin && git rebase origin/$(default_branch)'
 alias gc='git checkout' 
+alias gcd='git checkout develop && git pull'
 
 function glog () {
     git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
