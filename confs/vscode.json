@@ -1,18 +1,26 @@
 {
-    "workbench.colorTheme": "Palenight Theme",
-    "workbench.iconTheme": "vscode-icons",
-    "terminal.integrated.shell.osx": "/bin/zsh",
-    "terminal.integrated.fontFamily": "Hack Nerd Font",
-    "git.enableSmartCommit": true,
-    "eslint.autoFixOnSave": true,
-    "workbench.editor.showTabs": true,
-    "editor.fontFamily": "Hack Nerd Font",
-    "workbench.editor.enablePreview": false,
-    "eslint.validate": [
-        "javascript",
-        "javascriptreact",
-        {"language": "typescript", "autoFix": true },
-        {"language": "typescriptreact", "autoFix": true }
-      ],
-    "files.autoSave": "off"
+  "workbench.colorTheme": "Palenight Theme",
+  "workbench.iconTheme": "vscode-icons",
+  "terminal.integrated.shell.osx": "/bin/zsh",
+  "terminal.integrated.fontFamily": "Hack Nerd Font",
+  "terminal.external.osxExec": "iTerm.app",
+  "git.enableSmartCommit": true,
+  "workbench.editor.showTabs": true,
+  "editor.fontFamily": "Hack Nerd Font",
+  "workbench.editor.enablePreview": false,
+  "terminal.explorerKind": "external",
+  "files.autoSave": "off",
+  "editor.suggestSelection": "first",
+  "git.autofetch": true,
+  "window.zoomLevel": 0,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "go.formatTool": "goimports",
+  "go.useLanguageServer": true,
+  "stylelint.enable": true,
+  "errorLens.addAnnotationTextPrefixes": true,
+  "errorLens.addNumberOfDiagnostics": true,
+  "errorLens.fontStyleItalic": true
 }
