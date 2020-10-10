@@ -24,3 +24,7 @@ ln -s ~/.zprezto/modules/prompt/external/powerlevel9k/powerlevel9k.zsh-theme ~/.
 cp -f ./zsh/.zpreztorc ~/.zpreztorc
 cp -f ./zsh/.zshrc ~/.zshrc
 cp -f ./zsh/.env ~/.env
+
+compaudit | xargs sudo chmod g-w
+sudo chown -R $(whoami) /usr/local/share/zsh /usr/local/share/zsh/site-functions
+chmod u+w /usr/local/share/zsh /usr/local/share/zsh/site-functions

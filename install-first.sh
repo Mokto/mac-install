@@ -2,16 +2,11 @@
 
 sudo spctl --master-disable
 
-brew install \
-    zsh \
-    1password \
-    google-chrome \
-    zsh-completions
-
-brew cask install iterm2 visual-studio-code
+# brew install \
+#     zsh-completions
 
 brew tap homebrew/cask-fonts
-brew cask install font-hack-nerd-font
+brew cask install font-hack-nerd-font iterm2 visual-studio-code 1password google-chrome gpg-suite
 
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension jpoissonnier.vscode-styled-components

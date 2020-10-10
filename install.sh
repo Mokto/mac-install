@@ -31,7 +31,7 @@ brew cask install \
     vlc \
     insomnia \
     telegram \
-    gpg-suite \
+    # gpg-suite \
     studio-3t \
     ngrok \
     whatsapp \
@@ -44,27 +44,28 @@ brew cask install google-cloud-sdk
 
 brew install  \
     coreutils \
-    rbenv \
     vault \
     awscli \
     kubernetes-cli \
     kubernetes-helm \
+    go \
     mercurial
 
 # RUBY + BUNDLER
-brew install rbenv
-eval "$(rbenv init -)"
-rbenv install $(rbenv install -l | grep -v - | tail -1)
-rbenv global $(rbenv install -l | grep -v - | tail -1)
-gem install bundler
-gem install cocoapods
-gem install fastlane -NV
+# TODO
+# brew install rbenv
+# eval "$(rbenv init -)"
+# rbenv install $(rbenv install -l | grep -v - | tail -1)
+# rbenv global $(rbenv install -l | grep -v - | tail -1)
+# gem install bundler
+# gem install cocoapods
+# gem install fastlane -NV
 
 # GOLANG
 
 zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 [[ -s "/Users/theo/.gvm/scripts/gvm" ]] && source "/Users/theo/.gvm/scripts/gvm"
-gvm install go1.15 --with-protobuf --prefer-binary
+gvm install go1.15 --with-protobuf
 
 # NodeJS
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
@@ -74,18 +75,20 @@ nvm install 14
 
 npm install -g rebase-editor
 git config --global sequence.editor rebase-editor
+npm i -g npm-check-updates
 
 ./utils/mac-settings.sh
+
+defaults write com.apple.dock tilesize -int 50
+defaults write com.apple.dock autohide -bool false
+killall Dock
+
+
+
 ./utils/dock-icons.sh
 
 
-pod setup
+# TODO
+# pod setup
 
-
-#eksctl
-
-brew tap weaveworks/tap
-brew install weaveworks/tap/eksctl
-mkdir -p ~/.zsh/completion/
-eksctl completion zsh > ~/.zsh/completion/_eksctl
 

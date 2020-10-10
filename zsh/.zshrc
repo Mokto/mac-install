@@ -59,9 +59,9 @@ function gb () {
     fi
 }
 
-# createVaultUser () {
-#   vault write auth/userpass/users/$1 \
-#     password=$2
-# }
-source '$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-source '$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
+[[ -s "/Users/theo/.gvm/scripts/gvm" ]] && source "/Users/theo/.gvm/scripts/gvm"
+
+export PATH="${PATH}:~/go/bin"
