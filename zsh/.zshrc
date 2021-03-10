@@ -59,6 +59,10 @@ function gb () {
     fi
 }
 
+function killport () {
+       kill -9 $(lsof -i:$1 -t) 2> /dev/null
+}
+
 source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
