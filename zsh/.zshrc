@@ -63,9 +63,12 @@ function killport () {
        kill -9 $(lsof -i:$1 -t) 2> /dev/null
 }
 
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path$
+source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/comp$
 
 [[ -s "/Users/theo/.gvm/scripts/gvm" ]] && source "/Users/theo/.gvm/scripts/gvm"
 
-export PATH="${PATH}:~/go/bin"
+export PATH="${PATH}:/Users/$USER/go/bin:~/go/bin"
+
+
+colorscript -e crunch
