@@ -71,4 +71,6 @@ source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/comp$
 export PATH="${PATH}:/Users/$USER/go/bin:~/go/bin"
 
 
-colorscript -e crunch
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
+
