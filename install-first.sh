@@ -7,7 +7,7 @@ sudo cp CascadiaCodePL.ttf /Library/Fonts/
 brew install iterm2 visual-studio-code 1password google-chrome gpg-suite --cask
 
 code --install-extension dbaeumer.vscode-eslint
-code --install-extension jpoissonnier.vscode-styled-components
+code --install-extension styled-components.vscode-styled-components
 code --install-extension vscode-icons-team.vscode-icons
 code --install-extension whizkydee.material-palenight-theme
 code --install-extension EditorConfig.EditorConfig
