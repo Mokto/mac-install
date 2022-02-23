@@ -4,7 +4,7 @@ sudo spctl --master-disable
 
 sudo cp CascadiaCodePL.ttf /Library/Fonts/
 
-brew cask install iterm2 visual-studio-code 1password google-chrome gpg-suite
+brew install iterm2 visual-studio-code 1password google-chrome gpg-suite --cask
 
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension jpoissonnier.vscode-styled-components
