@@ -2,7 +2,7 @@
 
 sudo spctl --master-disable
 
-sudo cp myfont.ttf CascadiaCodePL.ttf /Library/Fonts/
+sudo cp CascadiaCodePL.ttf /Library/Fonts/
 
 brew cask install iterm2 visual-studio-code 1password google-chrome gpg-suite
 

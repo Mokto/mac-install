@@ -13,9 +13,9 @@ git config --global user.name "$name"
 echo "Done"
 
 
-gpg --full-generate-key
-git config --global gpg.program /usr/local/MacGPG2/bin/gpg2
-git config --global commit.gpgsign true 
+# gpg --full-generate-key
+# git config --global gpg.program /usr/local/MacGPG2/bin/gpg2
+# git config --global commit.gpgsign true 
 
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
     ssh-keygen
@@ -29,27 +29,20 @@ brew cask install \
     docker \
     rambox \
     vlc \
-    insomnia \
     telegram \
-    # gpg-suite \
-    studio-3t \
     ngrok \
     whatsapp \
     postman \
-    karabiner-elements \
     tunnelblick \
-    openjdk@11
+    openjdk
 
-sudo ln -sfn $(brew --prefix)/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+# sudo ln -sfn $(brew --prefix)/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
 
 brew tap homebrew/cask-drivers
 brew cask install logitech-options
 brew cask install google-cloud-sdk
 
 brew install  \
-    coreutils \
-    vault \
-    awscli \
     kubernetes-cli \
     kubernetes-helm \
     go \
@@ -57,21 +50,11 @@ brew install  \
     jq \
     pulumi
 
-# RUBY + BUNDLER
-# TODO
-# brew install rbenv
-# eval "$(rbenv init -)"
-# rbenv install $(rbenv install -l | grep -v - | tail -1)
-# rbenv global $(rbenv install -l | grep -v - | tail -1)
-# gem install bundler
-# gem install cocoapods
-# gem install fastlane -NV
-
 # GOLANG
 
-zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-[[ -s "/Users/theo/.gvm/scripts/gvm" ]] && source "/Users/theo/.gvm/scripts/gvm"
-gvm install go1.15 --with-protobuf
+# zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+# [[ -s "/Users/theo/.gvm/scripts/gvm" ]] && source "/Users/theo/.gvm/scripts/gvm"
+# gvm install go1.15 --with-protobuf
 
 # NodeJS
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
