@@ -2,11 +2,9 @@
 
 sudo spctl --master-disable
 
-# brew install \
-#     zsh-completions
+sudo cp myfont.ttf CascadiaCodePL.ttf /Library/Fonts/
 
-brew tap homebrew/cask-fonts
-brew cask install font-hack-nerd-font iterm2 visual-studio-code 1password google-chrome gpg-suite
+brew cask install iterm2 visual-studio-code 1password google-chrome gpg-suite
 
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension jpoissonnier.vscode-styled-components

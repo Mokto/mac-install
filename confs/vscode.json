@@ -1,18 +1,16 @@
 {
   "workbench.colorTheme": "Palenight Theme",
   "workbench.iconTheme": "vscode-icons",
-  "terminal.integrated.shell.osx": "/bin/zsh",
-  "terminal.integrated.fontFamily": "Hack Nerd Font",
+  "terminal.integrated.fontFamily": "Cascadia Code PL",
   "terminal.external.osxExec": "iTerm.app",
   "git.enableSmartCommit": true,
   "workbench.editor.showTabs": true,
-  "editor.fontFamily": "Hack Nerd Font",
+  "editor.fontFamily": "Cascadia Code PL",
   "workbench.editor.enablePreview": false,
   "terminal.explorerKind": "external",
   "files.autoSave": "off",
   "editor.suggestSelection": "first",
   "git.autofetch": true,
-  "window.zoomLevel": 0,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
@@ -20,7 +18,30 @@
   "go.formatTool": "goimports",
   "go.useLanguageServer": true,
   "stylelint.enable": true,
-  "errorLens.addAnnotationTextPrefixes": true,
-  "errorLens.addNumberOfDiagnostics": true,
-  "errorLens.fontStyleItalic": true
+  "errorLens.fontStyleItalic": true,
+  "workbench.startupEditor": "newUntitledFile",
+  "editor.fontLigatures": true,
+  "vsicons.dontShowNewVersionMessage": true,
+  "go.toolsManagement.autoUpdate": true,
+  "python.linting.mypyEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": [
+    "--ignore=E501"
+  ],
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true,
+  "python.venvPath": "/Users/theo/.local/share/virtualenvs",
+  "[python]": {
+    "gitlens.codeLens.symbolScopes": [
+      "!Module"
+    ],
+    "editor.wordBasedSuggestions": false,
+    "editor.formatOnSave": true
+  },
+  "python.testing.autoTestDiscoverOnSaveEnabled": true,
+  "python.formatting.provider": "black",
+  "python.linting.pylamaPath": "/qwdqwdopqkwd/qwd/qwd",
+  "window.zoomLevel": 2,
+  "editor.inlineSuggest.enabled": true,
+  "files.defaultLanguage": "json"
 }
