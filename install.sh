@@ -22,25 +22,21 @@ if [ ! -f ~/.ssh/id_rsa.pub ]; then
 fi
 
 
-brew cask install \
+brew install \
     slack \
     spotify \
     firefox \
     docker \
-    rambox \
     vlc \
-    telegram \
     ngrok \
     whatsapp \
     postman \
-    tunnelblick \
-    openjdk
+    ferdi \
+    tunnelblick --cask
 
 # sudo ln -sfn $(brew --prefix)/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
 
-brew tap homebrew/cask-drivers
-brew cask install logitech-options
-brew cask install google-cloud-sdk
+brew install google-cloud-sdk --cask
 
 brew install  \
     kubernetes-cli \
@@ -48,19 +44,14 @@ brew install  \
     go \
     mercurial \
     jq \
-    pulumi
-
-# GOLANG
-
-# zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-# [[ -s "/Users/theo/.gvm/scripts/gvm" ]] && source "/Users/theo/.gvm/scripts/gvm"
-# gvm install go1.15 --with-protobuf
+    pulumi \
+    openjdk
 
 # NodeJS
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-nvm install 14
+nvm install 16
 
 npm install -g rebase-editor
 git config --global sequence.editor rebase-editor
@@ -83,8 +74,6 @@ defaults write com.apple.dock wvous-br-corner -int 0
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 
 killall Dock
-
-
 
 ./utils/dock-icons.sh
 

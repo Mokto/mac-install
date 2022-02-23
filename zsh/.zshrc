@@ -2,17 +2,17 @@
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
-
+eval $(/opt/homebrew/bin/brew shellenv)
 # NVM 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 #RUBY
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
 
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-export PATH="${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
+#export ANDROID_HOME="$HOME/Library/Android/sdk"
+#export PATH="${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
 
 # Customize to your needs...
 # https://github.com/bhilburn/powerlevel9k#customizing-prompt-segments
@@ -66,7 +66,7 @@ function killport () {
 source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path$
 source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/comp$
 
-[[ -s "/Users/theo/.gvm/scripts/gvm" ]] && source "/Users/theo/.gvm/scripts/gvm"
+#[[ -s "/Users/theo/.gvm/scripts/gvm" ]] && source "/Users/theo/.gvm/scripts/gvm"
 
 export PATH="${PATH}:/Users/$USER/go/bin:~/go/bin"
 
