@@ -27,6 +27,7 @@ brew install \
     spotify \
     firefox \
     docker \
+    notion \
     vlc \
     ngrok \
     whatsapp \
@@ -52,6 +53,8 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install 16
+
+curl https://pyenv.run | bash
 
 npm install -g rebase-editor
 git config --global sequence.editor rebase-editor
@@ -80,5 +83,9 @@ killall Dock
 
 # TODO
 # pod setup
+
+
+open confs/material-design-colors.itermcolors
+
 
 
