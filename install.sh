@@ -33,6 +33,7 @@ brew install \
     whatsapp \
     postman \
     ferdi \
+    zoom \
     tunnelblick --cask
 
 # sudo ln -sfn $(brew --prefix)/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk

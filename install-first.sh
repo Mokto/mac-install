@@ -17,5 +17,6 @@ code --install-extension silvenon.mdx
 code --install-extension stylelint.vscode-stylelint
 code --install-extension usernamehw.errorlens
 code --install-extension golang.go
+code --install-extension ms-python.python
 
 cp confs/vscode.json ~/Library/Application\ Support/Code/User/settings.json
