@@ -7,6 +7,28 @@ read name
 echo "Git email ?"
 read email
 
+sudo spctl --master-disable
+
+cp -f ./zsh/.zshrc ~/.zshrc
+
+sudo cp CascadiaCodePL.ttf /Library/Fonts/
+
+brew install zsh-autosuggestions starship iterm2 visual-studio-code 1password google-chrome gpg-suite --cask
+
+code --install-extension dbaeumer.vscode-eslint
+code --install-extension styled-components.vscode-styled-components
+code --install-extension vscode-icons-team.vscode-icons
+code --install-extension whizkydee.material-palenight-theme
+code --install-extension EditorConfig.EditorConfig
+code --install-extension eamodio.gitlens
+code --install-extension zxh404.vscode-proto3
+code --install-extension silvenon.mdx
+code --install-extension stylelint.vscode-stylelint
+code --install-extension usernamehw.errorlens
+code --install-extension golang.go
+code --install-extension ms-python.python
+
+cp confs/vscode.json ~/Library/Application\ Support/Code/User/settings.json
 
 git config --global user.email $email
 git config --global user.name "$name" 
@@ -28,35 +50,35 @@ brew install \
     firefox \
     docker \
     notion \
-    vlc \
     ngrok \
     whatsapp \
     postman \
-    ferdi \
+    ferdium-nightly \
     zoom \
     karabiner-elements \
+    google-cloud-sdk \
+    dockutil \
     tunnelblick --cask
-
-# sudo ln -sfn $(brew --prefix)/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
-
-brew install google-cloud-sdk --cask
 
 brew install  \
     kubernetes-cli \
     kubernetes-helm \
-    go \
-    mercurial \
     jq \
     pulumi \
-    openjdk
+    openjdk \
+    asdf
 
-# NodeJS
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-nvm install 16
+$(brew --prefix asdf)/libexec/asdf.sh
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf plugin-add python
+asdf plugin-add golang
+asdf install nodejs latest
+asdf install python latest
+asdf install golang latest
+asdf global nodejs latest
+asdf global python latest
+asdf global golang latest
 
-curl https://pyenv.run | bash
 
 npm install -g rebase-editor
 git config --global sequence.editor rebase-editor
@@ -78,14 +100,8 @@ defaults write com.apple.dock wvous-bl-corner -int 0
 defaults write com.apple.dock wvous-br-corner -int 0
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 
-killall Dock
 
 ./utils/dock-icons.sh
-
-
-# TODO
-# pod setup
-
 
 open confs/material-design-colors.itermcolors
 

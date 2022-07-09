@@ -1,33 +1,35 @@
 #/bin/bash
 
-python utils/dock-icon-remove.py -r "/Applications/Launchpad.app"
-python utils/dock-icon-remove.py -r "/Applications/Siri.app"
-python utils/dock-icon-remove.py -r "/Applications/Safari.app"
-python utils/dock-icon-remove.py -r "/Applications/Mail.app"
-python utils/dock-icon-remove.py -r "/Applications/Contacts.app"
-python utils/dock-icon-remove.py -r "/Applications/Calendar.app"
-python utils/dock-icon-remove.py -r "/Applications/Reminders.app"
-python utils/dock-icon-remove.py -r "/Applications/Maps.app"
-python utils/dock-icon-remove.py -r "/Applications/Photos.app"
-python utils/dock-icon-remove.py -r "/Applications/FaceTime.app"
-python utils/dock-icon-remove.py -r "/Applications/iTunes.app"
-python utils/dock-icon-remove.py -r "/Applications/App Store.app"
-python utils/dock-icon-remove.py -r "/Applications/Podcasts.app"
-python utils/dock-icon-remove.py -r "/Applications/TV.app"
-python utils/dock-icon-remove.py -r "/Applications/Music.app"
-python utils/dock-icon-remove.py -r "/Applications/Feedback Assistant.app"
-python utils/dock-icon-remove.py -r "/Applications/Launchpad.app"
-python utils/dock-icon-remove.py -r "/Applications/Messages.app"
-python utils/dock-icon-remove.py -r "/Applications/Keynote.app"
+dockutil --remove Launchpad.app
+dockutil --remove Siri.app
+dockutil --remove Safari.app
+dockutil --remove Mail.app
+dockutil --remove Contacts.app
+dockutil --remove Calendar.app
+dockutil --remove Reminders.app
+dockutil --remove Maps.app
+dockutil --remove Photos.app
+dockutil --remove FaceTime.app
+dockutil --remove iTunes.app
+dockutil --remove App Store
+dockutil --remove Podcasts.app
+dockutil --remove TV.app
+dockutil --remove Music.app
+dockutil --remove Feedback Assistant
+dockutil --remove Launchpad.app
+dockutil --remove Messages.app
+dockutil --remove Keynote.app
+
+
 python utils/dock-icon-remove.py -r "/Applications/Numbers.app"
 python utils/dock-icon-remove.py -r "/Applications/Pages.app"
 python utils/dock-icon-remove.py -r "/Applications/Notes.app"
 
 
-defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Spotify.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"; killall Dock
-defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Ferdi.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"; killall Dock
-defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Visual Studio Code.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"; killall Dock
-defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Slack.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"; killall Dock
-defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Google Chrome.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"; killall Dock
-defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"; killall Dock
-defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Notion.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"; killall Dock
+dockutil --add /Applications/Spotify.app
+dockutil --add /Applications/Ferdium.app
+dockutil --add /Applications/Visual Studio
+dockutil --add /Applications/Slack.app
+dockutil --add /Applications/Google Chrome
+dockutil --add /Applications/iTerm.app
+dockutil --add /Applications/Notion.app

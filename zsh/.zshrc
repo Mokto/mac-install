@@ -1,30 +1,8 @@
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+eval "$(starship init zsh)"
+
+. $(brew --prefix asdf)/libexec/asdf.sh
 eval $(/opt/homebrew/bin/brew shellenv)
-# NVM 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-#RUBY
-#eval "$(rbenv init -)"
-
-#export ANDROID_HOME="$HOME/Library/Android/sdk"
-#export PATH="${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
-
-# Customize to your needs...
-# https://github.com/bhilburn/powerlevel9k#customizing-prompt-segments
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_DISABLE_RPROMPT=true
-
-cat ~/.env | while read line; do
-    export $line
-done
-
-export GPG_TTY=$(tty)
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 alias default_branch='git branch -r | grep  "HEAD -> " | sed -e "s/^[[:space:]]*//"  | sed -e "s/^origin\/HEAD -> origin\///" | sed -e "s/^[[:space:]]*//"'
 alias current_branch='git rev-parse --abbrev-ref HEAD'
@@ -38,39 +16,39 @@ alias gcd='git checkout develop && git fetch origin develop && git reset --hard 
 function glog () {
     git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
 }
-function gco () {
-    local message=$@
-    if [ -z "${message// }" ]
-        then echo "Commit message missing"
-    else
-      # echo "git commit -am '$message'"
-      git commit -m "$message"
-    fi
-}
-function gb () {
-    local branch=$@
-    if [ -z "${branch// }" ]
-        then echo "Branch name missing"
-    else
-      git checkout develop
-      git fetch origin
-      git reset --hard origin/develop
-      git checkout -b "$branch"
-    fi
-}
+# function gco () {
+#     local message=$@
+#     if [ -z "${message// }" ]
+#         then echo "Commit message missing"
+#     else
+#       # echo "git commit -am '$message'"
+#       git commit -m "$message"
+#     fi
+# }
+# function gb () {
+#     local branch=$@
+#     if [ -z "${branch// }" ]
+#         then echo "Branch name missing"
+#     else
+#       git checkout develop
+#       git fetch origin
+#       git reset --hard origin/develop
+#       git checkout -b "$branch"
+#     fi
+# }
 
 function killport () {
        kill -9 $(lsof -i:$1 -t) 2> /dev/null
 }
 
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path$
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/comp$
+source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 
 #[[ -s "/Users/theo/.gvm/scripts/gvm" ]] && source "/Users/theo/.gvm/scripts/gvm"
 
-export PATH="${PATH}:/Users/$USER/go/bin:~/go/bin"
+# export PATH="${PATH}:/Users/$USER/go/bin:~/go/bin"
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"    # if `pyenv` is not already on PATH
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"    # if `pyenv` is not already on PATH
+# eval "$(pyenv init --path)"
+# eval "$(pyenv init -)"
