@@ -11,9 +11,13 @@ sudo spctl --master-disable
 
 cp -f ./zsh/.zshrc ~/.zshrc
 
-sudo cp CascadiaCodePL.ttf /Library/Fonts/
+sudo cp fonts/CascadiaCodePL.ttf /Library/Fonts/
+sudo cp "fonts/Caskaydia Mono Regular Nerd Font.ttf" /Library/Fonts/
 
 brew install zsh-autosuggestions starship iterm2 visual-studio-code 1password google-chrome gpg-suite --cask
+
+# Starship
+mkdir -p ~/.config && cp starship.toml ~/.config/starship.toml
 
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension styled-components.vscode-styled-components
@@ -68,7 +72,7 @@ brew install  \
     openjdk \
     asdf
 
-$(brew --prefix asdf)/libexec/asdf.sh
+source $(brew --prefix asdf)/libexec/asdf.sh
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf plugin-add python
 asdf plugin-add golang
@@ -82,6 +86,7 @@ asdf global python latest
 asdf global golang latest
 asdf global poetry latest
 
+source $(brew --prefix asdf)/libexec/asdf.sh
 
 npm install -g rebase-editor
 git config --global sequence.editor rebase-editor
