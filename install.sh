@@ -72,12 +72,15 @@ $(brew --prefix asdf)/libexec/asdf.sh
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf plugin-add python
 asdf plugin-add golang
+asdf plugin-add poetry https://github.com/asdf-community/asdf-poetry.git
 asdf install nodejs latest
 asdf install python latest
 asdf install golang latest
+asdf install poetry latest
 asdf global nodejs latest
 asdf global python latest
 asdf global golang latest
+asdf global poetry latest
 
 
 npm install -g rebase-editor
