@@ -2,8 +2,24 @@
 
 add_newline = true
 
+
 #format = """$character"""
 #right_format = """$all"""
+command_timeout = 1000
+#scan_timeout = 10
+
+[nodejs]
+disabled = false
+format = "[ $version](bold green) "
+
+[golang]
+disabled = false
+format = "[🐹 $version](bold cyan) "
+
+[python]
+disabled = false
+format = "[🐍 $version](bold green) "
+
 
 [package]
 disabled = true
