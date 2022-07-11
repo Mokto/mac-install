@@ -1,7 +1,9 @@
+
+eval $(/opt/homebrew/bin/brew shellenv)
+
 eval "$(starship init zsh)"
 
 . $(brew --prefix asdf)/libexec/asdf.sh
-eval $(/opt/homebrew/bin/brew shellenv)
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 alias default_branch='git branch -r | grep  "HEAD -> " | sed -e "s/^[[:space:]]*//"  | sed -e "s/^origin\/HEAD -> origin\///" | sed -e "s/^[[:space:]]*//"'
