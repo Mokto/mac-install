@@ -16,26 +16,6 @@ alias gcd='git checkout develop && git fetch origin develop && git reset --hard 
 function glog () {
     git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
 }
-# function gco () {
-#     local message=$@
-#     if [ -z "${message// }" ]
-#         then echo "Commit message missing"
-#     else
-#       # echo "git commit -am '$message'"
-#       git commit -m "$message"
-#     fi
-# }
-# function gb () {
-#     local branch=$@
-#     if [ -z "${branch// }" ]
-#         then echo "Branch name missing"
-#     else
-#       git checkout develop
-#       git fetch origin
-#       git reset --hard origin/develop
-#       git checkout -b "$branch"
-#     fi
-# }
 
 function killport () {
        kill -9 $(lsof -i:$1 -t) 2> /dev/null
@@ -44,11 +24,5 @@ function killport () {
 source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 
-#[[ -s "/Users/theo/.gvm/scripts/gvm" ]] && source "/Users/theo/.gvm/scripts/gvm"
 
-# export PATH="${PATH}:/Users/$USER/go/bin:~/go/bin"
-
-# export PYENV_ROOT="$HOME/.pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"    # if `pyenv` is not already on PATH
-# eval "$(pyenv init --path)"
-# eval "$(pyenv init -)"
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

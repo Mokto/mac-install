@@ -14,7 +14,7 @@ cp -f ./zsh/.zshrc ~/.zshrc
 sudo cp fonts/CascadiaCodePL.ttf /Library/Fonts/
 sudo cp "fonts/Caskaydia Mono Regular Nerd Font.ttf" /Library/Fonts/
 
-brew install zsh-autosuggestions starship iterm2 visual-studio-code 1password google-chrome gpg-suite --cask
+brew install zsh-autosuggestions zsh-syntax-highlighting starship iterm2 visual-studio-code 1password google-chrome gpg-suite --cask
 
 # Starship
 mkdir -p ~/.config && cp starship.toml ~/.config/starship.toml
