@@ -66,17 +66,24 @@ brew install  \
 
 source $(brew --prefix asdf)/libexec/asdf.sh
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf plugin-add python
-asdf plugin-add golang
-asdf plugin-add poetry https://github.com/asdf-community/asdf-poetry.git
 asdf install nodejs latest
-asdf install python latest
-asdf install golang latest
-asdf install poetry latest
 asdf global nodejs latest
+
+asdf plugin-add python
+asdf install python latest
 asdf global python latest
+
+asdf plugin-add golang
+asdf install golang latest
 asdf global golang latest
+
+asdf plugin-add poetry https://github.com/asdf-community/asdf-poetry.git
+asdf install poetry latest
 asdf global poetry latest
+
+asdf plugin-add pnpm
+asdf install pnpm latest
+asdf global pnpm latest
 
 source $(brew --prefix asdf)/libexec/asdf.sh
 
