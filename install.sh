@@ -7,17 +7,11 @@ read name
 echo "Git email ?"
 read email
 
+./install-config.sh
+
 sudo spctl --master-disable
 
-cp -f ./zsh/.zshrc ~/.zshrc
-
-sudo cp fonts/CascadiaCodePL.ttf /Library/Fonts/
-sudo cp "fonts/Caskaydia Mono Regular Nerd Font.ttf" /Library/Fonts/
-
-brew install zsh-autosuggestions zsh-syntax-highlighting starship iterm2 visual-studio-code 1password google-chrome gpg-suite --cask
-
-# Starship
-mkdir -p ~/.config && cp starship.toml ~/.config/starship.toml
+brew install zsh-autosuggestions zsh-syntax-highlighting starship visual-studio-code 1password google-chrome gpg-suite hyper --cask
 
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension styled-components.vscode-styled-components
@@ -31,8 +25,6 @@ code --install-extension stylelint.vscode-stylelint
 code --install-extension usernamehw.errorlens
 code --install-extension golang.go
 code --install-extension ms-python.python
-
-cp confs/vscode.json ~/Library/Application\ Support/Code/User/settings.json
 
 git config --global user.email $email
 git config --global user.name "$name" 

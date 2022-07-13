@@ -8,15 +8,15 @@ add_newline = true
 command_timeout = 1000
 
 [nodejs]
-disabled = true
+disabled = false
 format = "[ $version](bold green) "
 
 [golang]
-disabled = true
+disabled = false
 format = "[🐹 $version](bold cyan) "
 
 [python]
-disabled = true
+disabled = false
 format = "[🐍 $version](bold green) "
 
 
@@ -70,4 +70,4 @@ format = '[[( $all_status$ahead_behind)](bg:red)]($style) '
 time_format = "%T"
 format = "$time($style) "
 style = "bright-white"
-disabled = false
+disabled = true

@@ -31,5 +31,5 @@ dockutil --add /Applications/Ferdium.app
 dockutil --add /Applications/Visual Studio
 dockutil --add /Applications/Slack.app
 dockutil --add /Applications/Google Chrome
-dockutil --add /Applications/iTerm.app
+dockutil --add /Applications/Hyper.app
 dockutil --add /Applications/Notion.app

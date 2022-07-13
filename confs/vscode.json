@@ -1,11 +1,11 @@
 {
   "workbench.colorTheme": "Palenight Theme",
   "workbench.iconTheme": "vscode-icons",
-  "terminal.integrated.fontFamily": "CaskaydiaMonoPL Nerd Font",
+  "terminal.integrated.fontFamily": "CaskaydiaCove Nerd Font",
   "terminal.external.osxExec": "iTerm.app",
   "git.enableSmartCommit": true,
   "workbench.editor.showTabs": true,
-  "editor.fontFamily": "Cascadia Code PL",
+  "editor.fontFamily": "CaskaydiaCove Nerd Font",
   "workbench.editor.enablePreview": false,
   "terminal.explorerKind": "external",
   "files.autoSave": "off",
