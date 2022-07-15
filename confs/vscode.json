@@ -42,5 +42,8 @@
   "python.linting.pylamaPath": "/qwdqwdopqkwd/qwd/qwd",
   "window.zoomLevel": 2,
   "editor.inlineSuggest.enabled": true,
-  "files.defaultLanguage": "json"
+  "files.defaultLanguage": "json",
+  "[rust]": {
+    "editor.formatOnSave": true
+  }
 }

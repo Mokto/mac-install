@@ -85,6 +85,9 @@ asdf plugin-add pnpm
 asdf install pnpm latest
 asdf global pnpm latest
 
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+
 source $(brew --prefix asdf)/libexec/asdf.sh
 
 npm install -g rebase-editor
