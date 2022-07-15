@@ -11,7 +11,8 @@ read email
 
 sudo spctl --master-disable
 
-brew install zsh-autosuggestions zsh-syntax-highlighting starship visual-studio-code 1password google-chrome gpg-suite hyper --cask
+brew install zsh-autosuggestions zsh-syntax-highlighting starship
+brew install visual-studio-code 1password google-chrome gpg-suite hyper --cask
 
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension styled-components.vscode-styled-components
@@ -39,6 +40,7 @@ if [ ! -f ~/.ssh/id_rsa.pub ]; then
     ssh-keygen
 fi
 
+brew tap ferdium/ferdium
 
 brew install \
     slack \
