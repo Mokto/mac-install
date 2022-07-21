@@ -64,7 +64,9 @@ brew install  \
     jq \
     pulumi \
     openjdk \
-    asdf
+    asdf \
+    bat \
+    exa
 
 source $(brew --prefix asdf)/libexec/asdf.sh
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git

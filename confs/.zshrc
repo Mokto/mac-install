@@ -15,6 +15,9 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 export PATH="${PATH}:/Users/$USER/go/bin"
 
+alias cat="bat"
+alias ls="exa"
+
 alias default_branch='git branch -r | grep  "HEAD -> " | sed -e "s/^[[:space:]]*//"  | sed -e "s/^origin\/HEAD -> origin\///" | sed -e "s/^[[:space:]]*//"'
 alias current_branch='git rev-parse --abbrev-ref HEAD'
 alias gmergebase='git merge-base origin/$(default_branch) $(current_branch)'
