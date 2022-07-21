@@ -13,7 +13,7 @@ eval "$(starship init zsh)"
 . $(brew --prefix asdf)/libexec/asdf.sh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-export PATH="${PATH}:/Users/$USER/go/bin"
+export PATH="${PATH}:$(go env GOPATH)/bin"
 
 alias cat="bat"
 alias ls="exa"

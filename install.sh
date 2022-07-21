@@ -11,6 +11,9 @@ read email
 
 sudo spctl --master-disable
 
+sudo cp fonts/CascadiaCodePL.ttf ~/Library/Fonts/
+sudo cp "fonts/Caskaydia Cove Regular Nerd Font Complete.otf" ~/Library/Fonts/
+
 brew install zsh-autosuggestions zsh-syntax-highlighting starship
 brew install visual-studio-code 1password google-chrome gpg-suite hyper --cask
 
