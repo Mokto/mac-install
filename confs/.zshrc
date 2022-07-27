@@ -17,6 +17,7 @@ export PATH="${PATH}:$(go env GOPATH)/bin"
 
 alias cat="bat"
 alias ls="exa"
+alias grep="rg"
 
 alias default_branch='git branch -r | grep  "HEAD -> " | sed -e "s/^[[:space:]]*//"  | sed -e "s/^origin\/HEAD -> origin\///" | sed -e "s/^[[:space:]]*//"'
 alias current_branch='git rev-parse --abbrev-ref HEAD'

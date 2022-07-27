@@ -69,7 +69,8 @@ brew install  \
     openjdk \
     asdf \
     bat \
-    exa
+    exa \
+    ripgrep
 
 source $(brew --prefix asdf)/libexec/asdf.sh
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
