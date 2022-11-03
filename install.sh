@@ -67,7 +67,6 @@ brew install  \
     asdf \
     bat \
     exa \
-    dockutil \
     ripgrep
 
 ./install-config.sh
@@ -118,6 +117,7 @@ defaults write com.apple.dock wvous-bl-corner -int 0
 defaults write com.apple.dock wvous-br-corner -int 0
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 
+brew install --cask hpedrorodrigues/tools/dockutil
 
 ./utils/dock-icons.sh
 
