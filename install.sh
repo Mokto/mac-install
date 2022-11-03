@@ -56,6 +56,8 @@ brew install \
     zoom \
     karabiner-elements \
     google-cloud-sdk \
+    google-cloud-sdk \
+    iterm2 \
     tunnelblick --cask
 
 brew install  \
