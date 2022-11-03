@@ -7,8 +7,6 @@ read name
 echo "Git email ?"
 read email
 
-./install-config.sh
-
 sudo spctl --master-disable
 
 sudo cp fonts/CascadiaCodePL.ttf ~/Library/Fonts/
@@ -58,7 +56,6 @@ brew install \
     zoom \
     karabiner-elements \
     google-cloud-sdk \
-    dockutil \
     tunnelblick --cask
 
 brew install  \
@@ -70,7 +67,10 @@ brew install  \
     asdf \
     bat \
     exa \
+    dockutil \
     ripgrep
+
+./install-config.sh
 
 source $(brew --prefix asdf)/libexec/asdf.sh
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
