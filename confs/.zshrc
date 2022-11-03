@@ -26,6 +26,8 @@ alias gp='git push -u origin $(current_branch)'
 alias gr='git fetch origin && git rebase origin/$(default_branch)'
 alias gc='git checkout' 
 alias gcd='git checkout develop && git fetch origin develop && git reset --hard origin/develop'
+alias gsta='git stash --include-untracked'
+alias gsad='git stash apply stash@{0} && git stash drop stash@{0}'
 
 function glog () {
     git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
