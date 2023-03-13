@@ -16,14 +16,8 @@ dockutil --remove Podcasts.app
 dockutil --remove TV.app
 dockutil --remove Music.app
 dockutil --remove Feedback Assistant
-dockutil --remove Launchpad.app
-dockutil --remove Messages.app
+dockutil --remove com.apple.launchpad.launcher
 dockutil --remove Keynote.app
-
-
-python utils/dock-icon-remove.py -r "/Applications/Numbers.app"
-python utils/dock-icon-remove.py -r "/Applications/Pages.app"
-python utils/dock-icon-remove.py -r "/Applications/Notes.app"
 
 
 dockutil --add /Applications/Spotify.app

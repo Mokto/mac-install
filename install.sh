@@ -1,6 +1,10 @@
 #!/bin/bash
 
 
+testcmd () {
+    command -v "$1" >/dev/null
+}
+
 echo "Git name ?"
 read name
 
@@ -33,9 +37,9 @@ git config --global user.name "$name"
 echo "Done"
 
 
-# gpg --full-generate-key
-# git config --global gpg.program /usr/local/MacGPG2/bin/gpg2
-# git config --global commit.gpgsign true 
+gpg --full-generate-key
+git config --global gpg.program /usr/local/MacGPG2/bin/gpg2
+git config --global commit.gpgsign true 
 
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
     ssh-keygen
@@ -49,8 +53,7 @@ brew install \
     firefox \
     docker \
     notion \
-    ngrok \
-    whatsapp \
+    ngrok \s
     postman \
     ferdium-nightly \
     zoom \
@@ -62,7 +65,6 @@ brew install \
 
 brew install  \
     kubernetes-cli \
-    kubernetes-helm \
     jq \
     pulumi \
     openjdk \
@@ -94,7 +96,10 @@ asdf plugin-add pnpm
 asdf install pnpm latest
 asdf global pnpm latest
 
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+if ! testcmd cargo; then
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
+
 
 
 source $(brew --prefix asdf)/libexec/asdf.sh
@@ -102,22 +107,6 @@ source $(brew --prefix asdf)/libexec/asdf.sh
 npm install -g rebase-editor
 git config --global sequence.editor rebase-editor
 npm i -g npm-check-updates
-
-./utils/mac-settings.sh
-
-# Docker
-defaults write com.apple.dock tilesize -int 50
-defaults write com.apple.dock autohide -bool false
-# key repeat
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 12
-# Hot corners
-defaults write com.apple.dock wvous-tl-corner -int 0
-defaults write com.apple.dock wvous-tr-corner -int 0
-defaults write com.apple.dock wvous-bl-corner -int 0
-defaults write com.apple.dock wvous-br-corner -int 0
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 
 brew install --cask hpedrorodrigues/tools/dockutil
 
