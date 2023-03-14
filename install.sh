@@ -71,7 +71,11 @@ brew install  \
     asdf \
     bat \
     exa \
-    ripgrep
+    ripgrep \
+    protobuf \
+    openjdk@11
+
+sudo ln -sfn $(brew --prefix)/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
 
 ./install-config.sh
 
