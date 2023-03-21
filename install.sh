@@ -54,7 +54,7 @@ brew install \
     firefox \
     docker \
     notion \
-    ngrok \s
+    ngrok \
     postman \
     ferdium-nightly \
     zoom \
@@ -72,6 +72,7 @@ brew install  \
     asdf \
     bat \
     exa \
+    helm \
     ripgrep \
     protobuf \
     openjdk@11
