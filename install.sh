@@ -40,7 +40,7 @@ echo "Done"
 gpg --full-generate-key
 git config --global gpg.program /usr/local/MacGPG2/bin/gpg2
 git config --global commit.gpgsign true 
-git config --global core. editor "nano"
+git config --global core.editor "nano"
 
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
     ssh-keygen
