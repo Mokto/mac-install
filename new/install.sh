@@ -7,3 +7,8 @@ brew bundle --file=./Brewfile
 
 ln -sf ./dotfiles/.zshrc ~/.zshrc
 ln -sf ./dotfiles/.gitconfig ~/.gitconfig
+
+
+./dock.sh
+./touchid.sh
+./ssh-key.sh
