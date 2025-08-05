@@ -18,10 +18,15 @@ fi
 
 brew bundle
 
-ln -sf ./dotfiles/.zshrc ~/.zshrc
+ln -sf "$(pwd)/dotfiles/.zshrc" "$HOME/.zshrc"
+ln -sf "$(pwd)/dotfiles/.zimrc" "$HOME/.zimrc"
+
 # ln -sf ./dotfiles/.gitconfig ~/.gitconfig
 
 
 ./dock.sh
 ./touchid.sh
 ./ssh-key.sh
+./nodejs.sh
+
+./zsh.sh

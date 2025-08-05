@@ -1,5 +1,10 @@
 
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
+  source $ZIM_PATH init
+fi
+source ${ZIM_HOME}/init.zsh
 
 
 
@@ -21,3 +26,4 @@ export KUBECONFIG=/Users/theo/Projects/gitops/hetzner-k3s-dc1/kubeconfig.yaml
 
 
 export PATH="/opt/homebrew/opt/go@1.23/bin:$PATH"
+export PATH="/opt/homebrew/opt/node@22/bin:$PATH"

@@ -3,7 +3,6 @@
 # Define desired Dock layout
 DOCK_APPS=(
   "/Applications/Zed.app"
-  "/System/Applications/System Settings.app"
   "/Applications/Slack.app"
   "/Applications/Arc.app"
   "/Applications/1Password.app"
