@@ -8,6 +8,7 @@ brew "uv"
 brew "python@3.12"
 brew "node@22"
 brew "go@1.23"
+brew "dockutil"
 
 cask "zed"
 cask "raycast"
