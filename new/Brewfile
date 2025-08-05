@@ -9,7 +9,7 @@ brew "python@3.12"
 brew "node@22"
 brew "go@1.23"
 
-
+cask "zed"
 cask "raycast"
 cask "firefox"
 cask "ferdium"
