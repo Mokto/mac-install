@@ -21,4 +21,4 @@ if [ ! -f "$ZIM_HOME/init.zsh" ]; then
   echo "🎉 Zimfw setup complete. Restart your terminal or run: source ~/.zshrc"
 fi
 
-source $ZIM_PATH init && zimfw build
+source $ZIM_PATH init && zimfw update

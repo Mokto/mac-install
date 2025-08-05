@@ -2,5 +2,9 @@ zmodule zimfw/completion
 zmodule zimfw/git
 zmodule zimfw/input
 zmodule zimfw/utility
+zmodule zimfw/prompt
+zmodule prompt-pwd
+zmodule git-info
+zmodule eriner
 zmodule zsh-users/zsh-autosuggestions
 zmodule zsh-users/zsh-syntax-highlighting

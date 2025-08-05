@@ -20,6 +20,7 @@ brew bundle
 
 ln -sf "$(pwd)/dotfiles/.zshrc" "$HOME/.zshrc"
 ln -sf "$(pwd)/dotfiles/.zimrc" "$HOME/.zimrc"
+ln -sd "$(pwd)/dotfiles/zed.json" "$HOME/.config/zed/settings.json"
 
 git config --global user.name "Theo Mathieu"
 git config --global user.email tmathieu.github@fastmail.com
