@@ -2,10 +2,17 @@
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 
 if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
-  source $ZIM_PATH init
+  source /opt/homebrew/opt/zimfw/share/zimfw.zsh init
+  echo "Inited zimfw..."
 fi
 source ${ZIM_HOME}/init.zsh
 
+HISTFILE=~/.customhistory
+HISTSIZE=500000
+SAVEHIST=500000
+setopt appendhistory
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
 
 
 alias -- current_branch='git rev-parse --abbrev-ref HEAD'

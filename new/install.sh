@@ -21,12 +21,11 @@ brew bundle
 ln -sf "$(pwd)/dotfiles/.zshrc" "$HOME/.zshrc"
 ln -sf "$(pwd)/dotfiles/.zimrc" "$HOME/.zimrc"
 
-# ln -sf ./dotfiles/.gitconfig ~/.gitconfig
-
+git config --global user.name "Theo Mathieu"
+git config --global user.email tmathieu.github@fastmail.com
 
 ./dock.sh
 ./touchid.sh
 ./ssh-key.sh
 ./nodejs.sh
-
 ./zsh.sh

@@ -1,7 +1,6 @@
 zmodule zimfw/completion
 zmodule zimfw/git
 zmodule zimfw/input
-zmodule zimfw/prompt
 zmodule zimfw/utility
 zmodule zsh-users/zsh-autosuggestions
 zmodule zsh-users/zsh-syntax-highlighting

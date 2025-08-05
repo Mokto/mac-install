@@ -11,8 +11,6 @@ ZIM_HOME="$HOME/.zim"
 if ! brew list --formula | grep -q "^zimfw$"; then
   echo "🔧 Installing zimfw with Homebrew..."
   brew install zimfw
-else
-  echo "✅ zimfw already installed via Homebrew."
 fi
 
 
@@ -20,9 +18,7 @@ fi
 if [ ! -f "$ZIM_HOME/init.zsh" ]; then
   echo "🚀 Running zimfw install..."
   ZDOTDIR="$HOME"  ZIM_HOME="$ZIM_HOME" zsh -c "source $ZIM_PATH init && zimfw install"
-else
-  echo "✅ Zimfw already initialized."
+  echo "🎉 Zimfw setup complete. Restart your terminal or run: source ~/.zshrc"
 fi
 
-echo "🎉 Zimfw setup complete. Restart your terminal or run: source ~/.zshrc"
-source ~/.zshrc
+source $ZIM_PATH init && zimfw build
