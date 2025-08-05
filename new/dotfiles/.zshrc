@@ -32,6 +32,7 @@ alias -- gs='git rebase -i $(gmergebase)'
 alias -- gsad='git stash apply stash@{0} && git stash drop stash@{0}'
 alias -- gsta='git stash --include-untracked'
 alias -- ll='ls -la'
+alias -- platforms='zed ~/Projects/platforms'
 
 
 

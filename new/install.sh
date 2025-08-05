@@ -20,13 +20,14 @@ brew bundle
 
 ln -sf "$(pwd)/dotfiles/.zshrc" "$HOME/.zshrc"
 ln -sf "$(pwd)/dotfiles/.zimrc" "$HOME/.zimrc"
-ln -sd "$(pwd)/dotfiles/zed.json" "$HOME/.config/zed/settings.json"
+ln -sf "$(pwd)/dotfiles/zed.json" "$HOME/.config/zed/settings.json"
 
 git config --global user.name "Theo Mathieu"
 git config --global user.email tmathieu.github@fastmail.com
 
+./background/touchid.sh
+./background/ssh-key.sh
+./background/nodejs.sh
+./background/zsh.sh
+
 ./dock.sh
-./touchid.sh
-./ssh-key.sh
-./nodejs.sh
-./zsh.sh

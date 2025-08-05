@@ -9,6 +9,7 @@ DOCK_APPS=(
   "/Applications/ChatGPT.app"
   "/Applications/Kreya.app"
   "/Applications/Warp.app"
+  "/Applications/Messages.app"
 )
 
 DOCK_FOLDERS=(
@@ -18,7 +19,6 @@ DOCK_FOLDERS=(
 # Remove unwanted default apps if they exist
 UNWANTED_APPS=(
   "Mail"
-  "Messages"
   "Safari"
   "Launchpad"
   "Maps"
