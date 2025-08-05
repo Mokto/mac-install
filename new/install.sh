@@ -18,6 +18,12 @@ fi
 
 brew bundle
 
+# if fails, stop the script
+if [[ $? -ne 0 ]]; then
+  echo "Error: Homebrew bundle installation failed."
+  exit 1
+fi
+
 ln -sf "$(pwd)/dotfiles/.zshrc" "$HOME/.zshrc"
 ln -sf "$(pwd)/dotfiles/.zimrc" "$HOME/.zimrc"
 ln -sf "$(pwd)/dotfiles/zed.json" "$HOME/.config/zed/settings.json"

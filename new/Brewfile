@@ -9,6 +9,7 @@ brew "python@3.12"
 brew "node@22"
 brew "go@1.23"
 brew "dockutil"
+brew "rust"
 
 cask "1password"
 cask "zed"

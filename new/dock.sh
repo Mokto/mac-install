@@ -32,6 +32,8 @@ UNWANTED_APPS=(
   "Music"
   "Google Chrome"
   "Terminal"
+  "Font Book"
+  "Raycast"
 )
 
 
