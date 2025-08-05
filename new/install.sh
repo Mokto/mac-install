@@ -6,7 +6,7 @@ which brew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubuserconten
 brew bundle --file=./Brewfile
 
 ln -sf ./dotfiles/.zshrc ~/.zshrc
-ln -sf ./dotfiles/.gitconfig ~/.gitconfig
+# ln -sf ./dotfiles/.gitconfig ~/.gitconfig
 
 
 ./dock.sh
