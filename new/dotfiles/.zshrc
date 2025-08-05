@@ -18,3 +18,6 @@ alias -- ll='ls -la'
 
 
 export KUBECONFIG=/Users/theo/Projects/gitops/hetzner-k3s-dc1/kubeconfig.yaml
+
+
+export PATH="/opt/homebrew/opt/go@1.23/bin:$PATH"

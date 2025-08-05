@@ -2,11 +2,14 @@
 
 # Define desired Dock layout
 DOCK_APPS=(
-  "/Applications/Google Chrome.app"
-  "/Applications/Visual Studio Code.app"
-  "/System/Applications/Calendar.app"
+  "/Applications/Zed.app"
   "/System/Applications/System Settings.app"
   "/Applications/Slack.app"
+  "/Applications/Arc.app"
+  "/Applications/1Password.app"
+  "/Applications/ChatGPT.app"
+  "/Applications/Kreya.app"
+  "/Applications/Warp.app"
 )
 
 DOCK_FOLDERS=(
@@ -18,6 +21,18 @@ UNWANTED_APPS=(
   "Mail"
   "Messages"
   "Safari"
+  "Launchpad"
+  "Maps"
+  "Photos"
+  "FaceTime"
+  "Calendar"
+  "Contacts"
+  "Reminders"
+  "Freeform"
+  "TV"
+  "Music"
+  "Google Chrome"
+  "Terminal"
 )
 
 
