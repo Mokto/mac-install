@@ -10,6 +10,8 @@ DOCK_APPS=(
   "/Applications/Kreya.app"
   "/Applications/Warp.app"
   "/Applications/Messages.app"
+  "/Applications/Ferdium.app"
+  "/Applications/Linear.app"
 )
 
 DOCK_FOLDERS=(
@@ -34,6 +36,7 @@ UNWANTED_APPS=(
   "Terminal"
   "Font Book"
   "Raycast"
+  "GPG Keychain"
 )
 
 
