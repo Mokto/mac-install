@@ -5,6 +5,6 @@ zmodule zimfw/utility
 zmodule zimfw/prompt
 zmodule prompt-pwd
 zmodule git-info
-zmodule eriner
+zmodule agnoster
 zmodule zsh-users/zsh-autosuggestions
 zmodule zsh-users/zsh-syntax-highlighting
