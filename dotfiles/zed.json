@@ -1,4 +1,7 @@
 {
+  "agent": {
+    "always_allow_tool_actions": false
+  },
   "features": {
     "edit_prediction_provider": "copilot"
   },
@@ -29,8 +32,7 @@
             "name": "ruff"
           }
         }
-      ],
-      "show_inline_completions": false
+      ]
     }
   }
 }
