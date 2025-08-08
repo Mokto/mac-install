@@ -21,25 +21,25 @@
   {
     "context": "Workspace",
     "bindings": {
-      "shift-cmd-g": "git_panel::ToggleFocus"
+      "cmd-2": "git_panel::ToggleFocus"
     }
   },
   {
     "context": "Workspace",
     "bindings": {
-      "shift-cmd-f": "project_panel::ToggleFocus"
+      "cmd-1": "project_panel::ToggleFocus"
     }
   },
   {
     "context": "Editor",
     "bindings": {
-      "shift-cmd-g": "git_panel::ToggleFocus"
+      "cmd-2": "git_panel::ToggleFocus"
     }
   },
   {
     "context": "Editor",
     "bindings": {
-      "shift-cmd-f": "project_panel::ToggleFocus"
+      "cmd-1": "project_panel::ToggleFocus"
     }
   }
 ]
