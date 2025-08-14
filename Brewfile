@@ -10,6 +10,7 @@ brew "node@22"
 brew "go@1.23"
 brew "dockutil"
 brew "rust"
+brew "helm"
 
 cask "1password"
 cask "zed"
