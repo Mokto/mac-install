@@ -35,7 +35,7 @@ alias -- ll='ls -la'
 alias -- platforms='zed ~/Projects/platforms'
 alias -- code='zed'
 
-alias -- fixactionrunners='ssh -i ~/Projects/gitops/hetzner-k3s-dc1/id_es25519  -o StrictHostKeyChecking=no root@65.109.75.99 rm -rf /home/runner/_work/platforms/platforms/go/pkg/mod/go.opencensus.io@v0.24.0 && ssh -i ~/Projects/gitops/hetzner-k3s-dc1/id_es25519  -o StrictHostKeyChecking=no root@157.180.52.189 rm -rf /home/runner/_work/platforms/platforms/go/pkg/mod/go.opencensus.io@v0.24.0'
+alias -- fixactionrunners='ssh -i ~/Projects/gitops/hetzner-k3s-dc1/id_es25519  -o StrictHostKeyChecking=no root@65.109.75.99 rm -rf /home/runner/_work/platforms/platforms/go && ssh -i ~/Projects/gitops/hetzner-k3s-dc1/id_es25519  -o StrictHostKeyChecking=no root@157.180.52.189 rm -rf /home/runner/_work/platforms/platforms/go'
 
 
 
