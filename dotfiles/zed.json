@@ -16,6 +16,14 @@
   "terminal": {
     "font_family": "Cascadia Code PL"
   },
+  "lsp": {
+    "protobuf-language-server": {
+      "binary": {
+        "path": "buf",
+        "arguments": ["beta", "lsp"]
+      }
+    }
+  },
   "languages": {
     "Python": {
       "language_servers": ["pyright", "ruff"],

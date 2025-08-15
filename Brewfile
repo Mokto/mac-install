@@ -11,6 +11,7 @@ brew "go@1.23"
 brew "dockutil"
 brew "rust"
 brew "helm"
+brew "buf"
 
 cask "1password"
 cask "zed"
