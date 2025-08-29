@@ -1,0 +1,26 @@
+[sequence]
+	editor = rebase-editor
+[core]
+	editor = nano
+[gpg]
+	program = /usr/local/MacGPG2/bin/gpg2
+[commit]
+	gpgsign = true
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+
+
+[includeIf "gitdir:~/Projects"]
+    path = ~/.gitconfig-github
+
+[includeIf "gitdir:~/Ocean/"]
+    path = ~/.gitconfig-ocean
+
+
+; [user]
+;     name = XXX
+;     email = XXX
+;     signingkey = XXX

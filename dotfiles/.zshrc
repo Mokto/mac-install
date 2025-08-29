@@ -34,6 +34,7 @@ alias -- gsta='git stash --include-untracked'
 alias -- ll='ls -la'
 alias -- platforms='zed ~/Projects/platforms'
 alias -- code='zed'
+alias -- terraform='tofu'
 
 alias -- fixactionrunners='ssh -i ~/Projects/gitops/hetzner-k3s-dc1/id_es25519  -o StrictHostKeyChecking=no root@65.109.75.99 rm -rf /home/runner/_work/platforms/platforms/go && ssh -i ~/Projects/gitops/hetzner-k3s-dc1/id_es25519  -o StrictHostKeyChecking=no root@157.180.52.189 rm -rf /home/runner/_work/platforms/platforms/go'
 
