@@ -3,9 +3,12 @@
 [core]
 	editor = nano
 [gpg]
-	program = /usr/local/MacGPG2/bin/gpg2
+    format = ssh
+[gpg "ssh"]
+    allowedSignersFile = ~/.ssh/allowed_signers
+    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [commit]
-	gpgsign = true
+    gpgsign = true
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
@@ -13,7 +16,7 @@
 	smudge = git-lfs smudge -- %f
 
 
-[includeIf "gitdir:~/Projects"]
+[includeIf "gitdir:~/Projects/"]
     path = ~/.gitconfig-github
 
 [includeIf "gitdir:~/Ocean/"]

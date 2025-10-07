@@ -28,12 +28,12 @@ ln -sf "$(pwd)/dotfiles/.zshrc" "$HOME/.zshrc"
 ln -sf "$(pwd)/dotfiles/.zimrc" "$HOME/.zimrc"
 ln -sf "$(pwd)/dotfiles/zed.json" "$HOME/.config/zed/settings.json"
 ln -sf "$(pwd)/dotfiles/zed-keymap.json" "$HOME/.config/zed/keymap.json"
-
-git config --global user.name "Theo Mathieu"
-git config --global user.email tmathieu.github@fastmail.com
+ln -sf "$(pwd)/dotfiles/.gitconfig" "$HOME/.gitconfig"
+ln -sf "$(pwd)/dotfiles/.gitconfig-github" "$HOME/.gitconfig-github"
+ln -sf "$(pwd)/dotfiles/.gitconfig-ocean" "$HOME/.gitconfig-ocean"
+ln -sf "$(pwd)/dotfiles/allowed_signers" "$HOME/.ssh/allowed_signers"
 
 ./background/touchid.sh
-./background/ssh-key.sh
 ./background/nodejs.sh
 ./background/zsh.sh
 
