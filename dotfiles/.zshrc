@@ -22,9 +22,9 @@ setopt SHARE_HISTORY
 
 
 alias -- current_branch='git rev-parse --abbrev-ref HEAD'
-alias -- default_branch='git branch -r | grep "HEAD -> " | sed -e "s/^[[:space:]]*//"  | sed -e "s/^origin\/HEAD -> origin\///" | sed -e "s/^[[:space:]]*//"'
+alias -- default_branch='git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed "s@^refs/remotes/origin/@@" || git branch -r | grep -E "origin/(main|master)" | head -1 | sed "s/.*origin\///" | tr -d " "'
 alias -- gc='git checkout'
-alias -- gcd='git checkout develop && git fetch origin develop && git reset --hard origin/develop'
+alias -- gcd='git checkout $(default_branch) && git fetch origin $(default_branch) && git reset --hard origin/$(default_branch'
 alias -- gmergebase='git merge-base origin/$(default_branch) $(current_branch)'
 alias -- gp='git push -u origin $(current_branch)'
 alias -- gr='git fetch origin && git rebase origin/$(default_branch)'
@@ -45,8 +45,9 @@ connect() {
 }
 
 
-export KUBECONFIG=/Users/theo/Projects/gitops/hetzner-k3s-dc1/kubeconfig.yaml
+# export KUBECONFIG=/Users/theo/Projects/gitops/hetzner-k3s-dc1/kubeconfig.yaml
 
 
 export PATH="/opt/homebrew/opt/go@1.23/bin:$PATH"
 export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"

@@ -1,6 +1,6 @@
 {
   "agent": {
-    "always_allow_tool_actions": false
+    "always_allow_tool_actions": true
   },
   "features": {
     "edit_prediction_provider": "copilot"

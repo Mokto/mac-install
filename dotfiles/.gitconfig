@@ -18,9 +18,3 @@
 
 [includeIf "gitdir:~/Ocean/"]
     path = ~/.gitconfig-ocean
-
-
-; [user]
-;     name = XXX
-;     email = XXX
-;     signingkey = XXX
