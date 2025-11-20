@@ -25,6 +25,9 @@
     }
   },
   "languages": {
+    "YAML": {
+      "format_on_save": "off"
+    },
     "Python": {
       "language_servers": ["pyright", "ruff"],
       "format_on_save": "on",
