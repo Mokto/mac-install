@@ -23,9 +23,12 @@
       "type": "registry"
     },
     "claude-acp": {
+      "default_config_options": {
+        "mode": "bypassPermissions"
+      },
       "default_mode": "bypassPermissions",
-      "favorite_config_option_values": {
-        "mode": ["bypassPermissions"]
+      "env": {
+        "ANTHROPIC_MODEL": "sonnet"
       },
       "type": "registry"
     },

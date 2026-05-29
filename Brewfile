@@ -13,6 +13,7 @@ brew "helm"
 brew "buf"
 brew "opentofu"
 brew "crystal"
+brew "gemini-cli"
 
 cask "ngrok"
 #cask "1password"
