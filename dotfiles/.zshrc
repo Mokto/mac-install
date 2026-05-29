@@ -54,3 +54,17 @@ export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export PATH="/Users/theo/Projects/mac-install/bin:$PATH"
+
+
+
+export FIGMA_TOKEN=
+export FIGMA_API_KEY=
+
+# pnpm
+export PNPM_HOME="/Users/theo/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+export PATH="/opt/homebrew/opt/node@24/bin:$PATH"

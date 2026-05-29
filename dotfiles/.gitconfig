@@ -21,3 +21,9 @@
 
 [includeIf "gitdir:~/Ocean/"]
     path = ~/.gitconfig-ocean
+[credential "https://ocean.ghe.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.ocean.ghe.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential

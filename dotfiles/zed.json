@@ -1,21 +1,93 @@
 {
+  "cli_default_open_behavior": "existing_window",
+  "project_panel": {
+    "dock": "right"
+  },
+  "outline_panel": {
+    "dock": "right"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "git_panel": {
+    "dock": "right"
+  },
+  "agent_servers": {
+    "gemini": {
+      "favorite_config_option_values": {
+        "approvalMode": ["yolo"]
+      },
+      "type": "registry"
+    },
+    "claude-acp": {
+      "favorite_config_option_values": {
+        "mode": ["bypassPermissions"]
+      },
+      "type": "registry"
+    },
+    "codex-acp": {
+      "favorite_config_option_values": {
+        "approval_policy": ["never"],
+        "sandbox_mode": ["danger-full-access"]
+      },
+      "type": "registry"
+    }
+  },
   "agent": {
-    "always_allow_tool_actions": true
+    "dock": "left",
+    "tool_permissions": {
+      "default": "confirm",
+      "tools": {
+        "terminal": {
+          "default": "confirm"
+        },
+        "edit_file": {
+          "default": "confirm"
+        }
+      }
+    },
+    "expand_edit_card": false,
+    "expand_terminal_card": false,
+    "use_modifier_to_send": false,
+    "default_model": {
+      "effort": "high",
+      "enable_thinking": true,
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-4.6"
+    }
   },
   "features": {
-    "edit_prediction_provider": "copilot"
+    "edit_prediction_provider": "zed"
   },
   "icon_theme": "Material Icon Theme",
   "ui_font_size": 16,
   "buffer_font_size": 15,
-  "theme": {
-    "mode": "system",
-    "light": "Tokyo Night Storm",
-    "dark": "One Dark"
-  },
+  "theme": "Catppuccin Latte",
   "terminal": {
     "font_family": "Cascadia Code PL"
   },
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/.jj",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    "**/.claude",
+    "**/.codex",
+    "**/.cursor",
+    "**/.venv",
+    "**/node_modules",
+    "**/.pnpm-store",
+    "**/.turbo",
+    "**/.svelte-kit",
+    "**/.next",
+    "**/dist",
+    "**/build"
+  ],
   "lsp": {
     "protobuf-language-server": {
       "binary": {

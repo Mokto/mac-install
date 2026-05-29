@@ -32,6 +32,8 @@ ln -sf "$(pwd)/dotfiles/.gitconfig" "$HOME/.gitconfig"
 ln -sf "$(pwd)/dotfiles/.gitconfig-github" "$HOME/.gitconfig-github"
 ln -sf "$(pwd)/dotfiles/.gitconfig-ocean" "$HOME/.gitconfig-ocean"
 ln -sf "$(pwd)/dotfiles/allowed_signers" "$HOME/.ssh/allowed_signers"
+mkdir -p "$HOME/.claude"
+ln -sf "$(pwd)/dotfiles/claude-settings.json" "$HOME/.claude/settings.json"
 
 ./background/touchid.sh
 ./background/nodejs.sh
