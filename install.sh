@@ -40,3 +40,11 @@ ln -sf "$(pwd)/dotfiles/claude-settings.json" "$HOME/.claude/settings.json"
 ./background/zsh.sh
 
 ./dock.sh
+
+# Install kill-idle-agents launchd service
+PLIST_DST="$HOME/Library/LaunchAgents/com.theo.kill-idle-agents.plist"
+mkdir -p "$HOME/Library/LaunchAgents"
+sed "s|/Users/theo/Projects/mac-install|$(pwd)|g" \
+  "$(pwd)/launchagents/com.theo.kill-idle-agents.plist" > "$PLIST_DST"
+launchctl unload "$PLIST_DST" 2>/dev/null
+launchctl load "$PLIST_DST"
