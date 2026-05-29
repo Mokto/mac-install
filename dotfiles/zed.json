@@ -14,18 +14,26 @@
   },
   "agent_servers": {
     "gemini": {
+      "default_config_options": {
+        "approvalMode": "yolo"
+      },
       "favorite_config_option_values": {
         "approvalMode": ["yolo"]
       },
       "type": "registry"
     },
     "claude-acp": {
+      "default_mode": "bypassPermissions",
       "favorite_config_option_values": {
         "mode": ["bypassPermissions"]
       },
       "type": "registry"
     },
     "codex-acp": {
+      "default_config_options": {
+        "approval_policy": "never",
+        "sandbox_mode": "danger-full-access"
+      },
       "favorite_config_option_values": {
         "approval_policy": ["never"],
         "sandbox_mode": ["danger-full-access"]
