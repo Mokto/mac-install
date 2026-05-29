@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 query.py:*)",
+      "Bash(python3 -c:*)",
+      "Bash(curl:*)",
+      "Bash(gh:*)",
+      "Bash(kubectl:*)",
+      "Bash(op:*)",
+      "Bash(for *)",
+      "Bash(sleep:*)",
+      "Bash(echo:*)",
+      "Read",
+      "Write",
+      "Edit"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(**/*secret*)",
+      "Bash(rm -rf:*)",
+      "Bash(sudo:*)"
+    ],
+    "defaultMode": "bypassPermissions"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "cat .claude/context-$(git branch --show-current).md 2>/dev/null || true"
+      }
+    ]
+  },
+  "disableAllHooks": false,
+  "model": "sonnet",
+  "skipDangerousModePermissionPrompt": true,
+  "preferredNotifChannel": "terminal_bell",
+  "autoCompactEnabled": true,
+  "cleanupPeriodDays": 180
+}
