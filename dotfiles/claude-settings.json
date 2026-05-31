@@ -26,8 +26,12 @@
   "hooks": {
     "SessionStart": [
       {
-        "type": "command",
-        "command": "cat .claude/context-$(git branch --show-current).md 2>/dev/null || true"
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat .claude/context-$(git branch --show-current).md 2>/dev/null || true"
+          }
+        ]
       }
     ]
   },

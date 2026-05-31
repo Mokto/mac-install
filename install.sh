@@ -41,6 +41,8 @@ ln -sf "$(pwd)/dotfiles/claude-settings.json" "$HOME/.claude/settings.json"
 
 ./dock.sh
 
+brew autoupdate start 43200 --upgrade --cleanup
+
 # Install kill-idle-agents launchd service
 PLIST_DST="$HOME/Library/LaunchAgents/com.theo.kill-idle-agents.plist"
 mkdir -p "$HOME/Library/LaunchAgents"

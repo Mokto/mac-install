@@ -59,6 +59,7 @@ export PATH="/Users/theo/Projects/mac-install/bin:$PATH"
 
 export FIGMA_TOKEN=
 export FIGMA_API_KEY=
+export GOOGLE_CLOUD_PROJECT_ID=oceanio-production
 
 # pnpm
 export PNPM_HOME="/Users/theo/Library/pnpm"

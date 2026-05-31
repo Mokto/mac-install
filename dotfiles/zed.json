@@ -23,6 +23,9 @@
       "type": "registry"
     },
     "claude-acp": {
+      "favorite_config_option_values": {
+        "mode": ["dontAsk"]
+      },
       "default_config_options": {
         "mode": "bypassPermissions"
       },
@@ -112,10 +115,13 @@
       "format_on_save": "off"
     },
     "Python": {
-      "language_servers": ["pyright", "ruff"],
+      "language_servers": ["py", "ruff"],
       "format_on_save": "on",
       "formatter": [
         {
+          "language_server": {
+            "name": "ruff"
+          },
           "code_actions": {
             "source.organizeImports.ruff": false,
             "source.fixAll.ruff": true
