@@ -2,16 +2,8 @@
 
 # Install Homebrew if not present
 if ! command -v brew >/dev/null; then
-  echo "Installing Homebrew..."
-  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-  # Set up environment for current session
-  if [[ -d /opt/homebrew ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-  elif [[ -d /usr/local/Homebrew ]]; then
-    eval "$(/usr/local/bin/brew shellenv)"
-  fi
-
+  echo "Setting up Homebrew..."
+  eval "$(/opt/homebrew/bin/brew shellenv)"
   echo "Homebrew installed and environment updated for current session."
 fi
 
@@ -41,6 +33,7 @@ ln -sf "$(pwd)/dotfiles/claude-settings.json" "$HOME/.claude/settings.json"
 
 ./dock.sh
 
+brew tap domt4/autoupdate
 brew autoupdate start 43200 --upgrade --cleanup
 
 # Install kill-idle-agents launchd service

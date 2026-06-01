@@ -12,6 +12,10 @@ DOCK_APPS=(
   "/Applications/Messages.app"
   "/Applications/Ferdium.app"
   "/Applications/Linear.app"
+  "/Applications/Fastmail.app"
+  "/Applications/WhatsApp.app"
+  "/Applications/Signal.app"
+  "/Applications/Linear.app"
 )
 
 DOCK_FOLDERS=(
@@ -37,6 +41,13 @@ UNWANTED_APPS=(
   "Font Book"
   "Raycast"
   "GPG Keychain"
+  "Keynote"
+  "Numbers"
+  "Pages"
+  "Phone"
+  "Apps"
+  "Games"
+  "App Store"
 )
 
 

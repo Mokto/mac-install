@@ -13,6 +13,9 @@
     "dock": "right"
   },
   "agent_servers": {
+    "cursor": {
+      "type": "registry"
+    },
     "gemini": {
       "default_config_options": {
         "approvalMode": "yolo"
@@ -113,6 +116,12 @@
     "**/dist",
     "**/build"
   ],
+  "auto_install_extensions": {
+    "html": true,
+    "svelte": true,
+    "catppuccin": true,
+    "material-icon-theme": true
+  },
   "lsp": {
     "protobuf-language-server": {
       "binary": {
