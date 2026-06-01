@@ -18,8 +18,18 @@ ps -eo pid,ppid,args | grep -E "claude-agent-sdk|claude --output|gemini-cli.*--a
   # Only kill if session is explicitly archived in Zed
   echo "$archived_sessions" | grep -qF "$session_id" || continue
 
-  # Kill the process and its parent npm wrapper
-  kill "$pid" "$ppid" 2>/dev/null && ((killed++))
+  # Skip processes started less than 3 minutes ago — user may have just opened the chat
+  proc_etime=$(ps -p "$pid" -o etime= 2>/dev/null | tr -d ' ')
+  [[ -z "$proc_etime" ]] && continue
+  # etime is [[DD-]HH:]MM:SS — if only MM:SS and minutes < 3, it's too fresh to kill
+  if [[ "$proc_etime" =~ ^([0-9]+):([0-9]+)$ ]]; then
+    [[ "${match[1]}" -lt 3 ]] && continue
+  fi
+
+  # Kill the process; only kill the parent wrapper if it has no other agent children
+  kill "$pid" 2>/dev/null && ((killed++))
+  other_children=$(ps -eo pid,ppid | awk -v ppid="$ppid" -v pid="$pid" '$2==ppid && $1!=pid' | wc -l | tr -d ' ')
+  [[ "$other_children" -eq 0 ]] && kill "$ppid" 2>/dev/null
 done
 
-echo "Killed $killed orphaned agent processes"
+echo "$(date '+%Y-%m-%d %H:%M:%S') Killed $killed orphaned agent processes"

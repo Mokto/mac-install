@@ -78,7 +78,18 @@
   "buffer_font_size": 15,
   "theme": "Catppuccin Latte",
   "terminal": {
-    "font_family": "Cascadia Code PL"
+    "font_family": "Cascadia Code PL",
+    "font_size": 13,
+    "font_features": {
+      "calt": true
+    },
+    "line_height": {
+      "custom": 1.6
+    },
+    "cursor_shape": "bar",
+    "env": {
+      "COLORTERM": "truecolor"
+    }
   },
   "file_scan_exclusions": [
     "**/.git",
