@@ -69,3 +69,6 @@ case ":$PATH:" in
 esac
 # pnpm end
 export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
+
+# orbstack
+export PATH="/Applications/OrbStack.app/Contents/MacOS/xbin:$PATH"
