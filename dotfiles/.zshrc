@@ -72,3 +72,6 @@ export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
 
 # orbstack
 export PATH="/Applications/OrbStack.app/Contents/MacOS/xbin:$PATH"
+
+# rights
+export HOMEBREW_CASK_OPTS="--appdir=~/Applications"

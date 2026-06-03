@@ -3,19 +3,19 @@
 # Define desired Dock layout
 DOCK_APPS=(
   "/Applications/Zed.app"
-  "/Applications/Slack.app"
-  "/Applications/Arc.app"
+  "~/Applications/Slack.app"
   "/Applications/1Password.app"
-  "/Applications/ChatGPT.app"
-  "/Applications/Kreya.app"
-  "/Applications/Warp.app"
+  "~/Applications/ChatGPT.app"
+  "~/Applications/Kreya.app"
+  "~/Applications/Warp.app"
   "/Applications/Messages.app"
-  "/Applications/Ferdium.app"
-  "/Applications/Linear.app"
+  "~/Applications/Linear.app"
   "/Applications/Fastmail.app"
-  "/Applications/WhatsApp.app"
-  "/Applications/Signal.app"
-  "/Applications/Linear.app"
+  "~/Applications/WhatsApp.app"
+  "~/Applications/Signal.app"
+  "~/Applications/Linear.app"
+  "~/Applications/Spotify.app"
+  "~/Applications/Slack.app"
 )
 
 DOCK_FOLDERS=(

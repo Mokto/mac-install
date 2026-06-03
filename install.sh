@@ -8,13 +8,13 @@ if ! command -v brew >/dev/null; then
 fi
 
 
-brew bundle
+mkdir -p "$HOME/Applications"
 
-# if fails, stop the script
-if [[ $? -ne 0 ]]; then
-  echo "Error: Homebrew bundle installation failed."
-  exit 1
-fi
+# Formulae + system casks that require /Applications
+brew bundle --file Brewfile || { echo "Error: Brewfile installation failed."; exit 1; }
+
+# Regular casks go to ~/Applications (no sudo needed for upgrades)
+HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications" brew bundle --file Brewfile.apps || { echo "Error: Brewfile.apps installation failed."; exit 1; }
 
 ln -sf "$(pwd)/dotfiles/.zshrc" "$HOME/.zshrc"
 ln -sf "$(pwd)/dotfiles/.zimrc" "$HOME/.zimrc"
@@ -33,8 +33,13 @@ ln -sf "$(pwd)/dotfiles/claude-settings.json" "$HOME/.claude/settings.json"
 
 ./dock.sh
 
-brew tap domt4/autoupdate
-brew autoupdate start 43200 --upgrade --cleanup
+# Idle-aware brew upgrade: runs when idle 15min+, at most every 12 hours
+chmod +x "$(pwd)/bin/brew-idle-upgrade.sh"
+IDLE_PLIST_DST="$HOME/Library/LaunchAgents/com.theo.brew-idle-upgrade.plist"
+sed "s|/Users/theo/Projects/mac-install|$(pwd)|g" \
+  "$(pwd)/launchagents/com.theo.brew-idle-upgrade.plist" > "$IDLE_PLIST_DST"
+launchctl unload "$IDLE_PLIST_DST" 2>/dev/null || true
+launchctl load "$IDLE_PLIST_DST"
 
 # Install kill-idle-agents launchd service
 PLIST_DST="$HOME/Library/LaunchAgents/com.theo.kill-idle-agents.plist"
