@@ -30,6 +30,7 @@
         "mode": ["dontAsk"]
       },
       "default_config_options": {
+        "model": "default",
         "mode": "bypassPermissions"
       },
       "default_mode": "bypassPermissions",

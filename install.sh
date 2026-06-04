@@ -26,6 +26,7 @@ ln -sf "$(pwd)/dotfiles/.gitconfig-ocean" "$HOME/.gitconfig-ocean"
 ln -sf "$(pwd)/dotfiles/allowed_signers" "$HOME/.ssh/allowed_signers"
 mkdir -p "$HOME/.claude"
 ln -sf "$(pwd)/dotfiles/claude-settings.json" "$HOME/.claude/settings.json"
+ln -sf "$(pwd)/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 ./background/touchid.sh
 ./background/nodejs.sh
@@ -41,10 +42,10 @@ sed "s|/Users/theo/Projects/mac-install|$(pwd)|g" \
 launchctl unload "$IDLE_PLIST_DST" 2>/dev/null || true
 launchctl load "$IDLE_PLIST_DST"
 
-# Install kill-idle-agents launchd service
-PLIST_DST="$HOME/Library/LaunchAgents/com.theo.kill-idle-agents.plist"
-mkdir -p "$HOME/Library/LaunchAgents"
-sed "s|/Users/theo/Projects/mac-install|$(pwd)|g" \
-  "$(pwd)/launchagents/com.theo.kill-idle-agents.plist" > "$PLIST_DST"
-launchctl unload "$PLIST_DST" 2>/dev/null
-launchctl load "$PLIST_DST"
+# # Install kill-idle-agents launchd service
+# PLIST_DST="$HOME/Library/LaunchAgents/com.theo.kill-idle-agents.plist"
+# mkdir -p "$HOME/Library/LaunchAgents"
+# sed "s|/Users/theo/Projects/mac-install|$(pwd)|g" \
+#   "$(pwd)/launchagents/com.theo.kill-idle-agents.plist" > "$PLIST_DST"
+# launchctl unload "$PLIST_DST" 2>/dev/null
+# launchctl load "$PLIST_DST"
