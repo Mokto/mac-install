@@ -1,0 +1,65 @@
+modelRoles: 
+  default: cursor/composer-2.5
+enabledModels: 
+  - claude-opus-4-8
+  - claude-sonnet-4-6
+  - composer-2.5
+tools: 
+  approvalMode: yolo
+  discoveryMode: auto
+fetch: 
+  enabled: true
+find: 
+  enabled: true
+search: 
+  enabled: true
+lsp: 
+  enabled: true
+debug: 
+  enabled: false
+todo: 
+  enabled: true
+irc: 
+  enabled: false
+async: 
+  enabled: false
+plan: 
+  enabled: false
+goal: 
+  enabled: true
+compaction: 
+  enabled: true
+ttsr: 
+  enabled: false
+retry: 
+  enabled: true
+skills: 
+  enabled: false
+checkpoint: 
+  enabled: true
+memories: 
+  enabled: false
+memory: 
+  backend: "off"
+renderMermaid: 
+  enabled: false
+secrets: 
+  enabled: true
+github: 
+  enabled: true
+web_search: 
+  enabled: true
+exa: 
+  enabled: false
+browser: 
+  enabled: false
+inspect_image: 
+  enabled: true
+stt: 
+  enabled: false
+tts: 
+  enabled: false
+vault: 
+  enabled: false
+lastChangelogVersion: 15.9.67
+setupVersion: 1

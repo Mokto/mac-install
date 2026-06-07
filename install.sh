@@ -28,9 +28,13 @@ mkdir -p "$HOME/.claude"
 ln -sf "$(pwd)/dotfiles/claude-settings.json" "$HOME/.claude/settings.json"
 ln -sf "$(pwd)/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
+mkdir -p "$HOME/.omp/agent"
+ln -sf "$(pwd)/dotfiles/omp/config.yml" "$HOME/.omp/agent/config.yml"
+
 ./background/touchid.sh
 ./background/nodejs.sh
 ./background/zsh.sh
+./background/omp.sh
 
 ./dock.sh
 

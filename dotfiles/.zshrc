@@ -54,7 +54,7 @@ export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export PATH="/Users/theo/Projects/mac-install/bin:$PATH"
-
+export PATH="/Users/theo/.bun/bin:$PATH"
 
 
 export FIGMA_TOKEN=

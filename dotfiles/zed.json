@@ -13,10 +13,25 @@
     "dock": "right"
   },
   "agent_servers": {
+    "omp": {
+      "favorite_config_option_values": {
+        "mode": [
+          "default"
+        ]
+      },
+      "default_config_options": {
+        "model": "anthropic/claude-sonnet-4-6",
+        "thinking": "auto"
+      },
+      "type": "custom",
+      "command": "/Users/theo/.bun/bin/omp",
+      "args": ["acp"]
+    },
     "cursor": {
       "type": "registry"
     },
     "gemini": {
+      "default_mode": "yolo",
       "default_config_options": {
         "approvalMode": "yolo"
       },
@@ -30,7 +45,7 @@
         "mode": ["dontAsk"]
       },
       "default_config_options": {
-        "model": "default",
+        "model": "sonnet",
         "mode": "bypassPermissions"
       },
       "default_mode": "bypassPermissions",
