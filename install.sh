@@ -31,6 +31,8 @@ mkdir -p "$HOME/.claude"
 ln -sf "$(pwd)/dotfiles/claude-settings.json" "$HOME/.claude/settings.json"
 ln -sf "$(pwd)/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
+echo "export MAC_INSTALL_DIR=\"$(pwd)\"" > "$HOME/.mac-install.env"
+
 mkdir -p "$HOME/.omp/agent"
 ln -sf "$(pwd)/dotfiles/omp/config.yml" "$HOME/.omp/agent/config.yml"
 EXT_PATHS=""
@@ -50,7 +52,7 @@ printf '{"extensions":[%s]}' "$EXT_PATHS" > "$HOME/.omp/agent/settings.json"
 # Idle-aware brew upgrade: runs when idle 15min+, at most every 12 hours
 chmod +x "$(pwd)/bin/brew-idle-upgrade.sh"
 IDLE_PLIST_DST="$HOME/Library/LaunchAgents/com.theo.brew-idle-upgrade.plist"
-sed "s|/Users/theo/Projects/mac-install|$(pwd)|g" \
+sed "s|INSTALL_DIR|$(pwd)|g; s|HOME_DIR|$HOME|g" \
   "$(pwd)/launchagents/com.theo.brew-idle-upgrade.plist" > "$IDLE_PLIST_DST"
 launchctl unload "$IDLE_PLIST_DST" 2>/dev/null || true
 launchctl load "$IDLE_PLIST_DST"

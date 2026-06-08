@@ -36,7 +36,6 @@ UNWANTED_APPS=(
   "Freeform"
   "TV"
   "Music"
-  "Google Chrome"
   "Terminal"
   "Font Book"
   "Raycast"

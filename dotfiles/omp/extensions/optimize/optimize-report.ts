@@ -11,6 +11,7 @@ import { join, dirname } from "node:path";
 import { parseArgs } from "node:util";
 
 const { values: args } = parseArgs({
+  args: process.argv.slice(2).filter((a) => a !== "-"),
   options: {
     days: { type: "string", default: "30" },
     json: { type: "boolean", default: false },

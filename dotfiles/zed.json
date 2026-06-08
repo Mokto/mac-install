@@ -27,7 +27,7 @@
         "thinking": "auto"
       },
       "type": "custom",
-      "command": "/Users/theo/.bun/bin/omp",
+      "command": "~/.bun/bin/omp",
       "args": ["acp"]
     },
     "cursor": {
