@@ -72,13 +72,13 @@
   "agent": {
     "dock": "left",
     "tool_permissions": {
-      "default": "confirm",
+      "default": "allow",
       "tools": {
         "terminal": {
-          "default": "confirm"
+          "default": "allow"
         },
         "edit_file": {
-          "default": "confirm"
+          "default": "allow"
         }
       }
     },

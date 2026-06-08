@@ -33,14 +33,17 @@ ln -sf "$(pwd)/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 echo "export MAC_INSTALL_DIR=\"$(pwd)\"" > "$HOME/.mac-install.env"
 
-mkdir -p "$HOME/.omp/agent"
-ln -sf "$(pwd)/dotfiles/omp/config.yml" "$HOME/.omp/agent/config.yml"
-EXT_PATHS=""
+mkdir -p "$HOME/.omp/agent" "$HOME/.omp/agent/extensions"
+ln -sfh "$(pwd)/dotfiles/omp/config.yml" "$HOME/.omp/agent/config.yml"
+ln -sfh "$(pwd)/dotfiles/omp/scripts" "$HOME/.omp/scripts"
 for ext in "$(pwd)/dotfiles/omp/extensions"/*/; do
-  [ -n "$EXT_PATHS" ] && EXT_PATHS="${EXT_PATHS},"
-  EXT_PATHS="${EXT_PATHS}\"${ext}\""
+  ext_name="$(basename "${ext%/}")"
+  mkdir -p "$HOME/.omp/agent/extensions/$ext_name"
+  for file in "$ext"*; do
+    [[ -L "$file" ]] && continue
+    ln -sfh "$file" "$HOME/.omp/agent/extensions/$ext_name/$(basename "$file")"
+  done
 done
-printf '{"extensions":[%s]}' "$EXT_PATHS" > "$HOME/.omp/agent/settings.json"
 
 ./background/touchid.sh
 ./background/nodejs.sh

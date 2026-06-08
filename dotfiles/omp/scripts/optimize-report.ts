@@ -1,19 +1,20 @@
 #!/usr/bin/env bun
 /**
  * OMP /optimize report — session mining + optimization candidates.
- * Usage: bun optimize-report.ts [--days 30] [--json] [--emit-rules]
+ * Usage: bun optimize-report.ts [--days 30] [--since <unix-ms>] [--json] [--emit-rules]
  */
 
 import { existsSync } from "node:fs";
 import { readdir, readFile, stat } from "node:fs/promises";
 import { homedir } from "node:os";
-import { join, dirname } from "node:path";
+import { join, dirname, basename } from "node:path";
 import { parseArgs } from "node:util";
 
 const { values: args } = parseArgs({
   args: process.argv.slice(2).filter((a) => a !== "-"),
   options: {
     days: { type: "string", default: "30" },
+    since: { type: "string" },
     json: { type: "boolean", default: false },
     "emit-rules": { type: "boolean", default: false },
     help: { type: "boolean", short: "h", default: false },
@@ -21,14 +22,18 @@ const { values: args } = parseArgs({
 });
 
 if (args.help) {
-  console.log("Usage: bun optimize-report.ts [--days 30] [--json] [--emit-rules]");
+  console.log("Usage: bun optimize-report.ts [--days 30] [--since <unix-ms>] [--json] [--emit-rules]");
   process.exit(0);
 }
 
 const DAYS = args.days ?? "30";
 const BIN = dirname(import.meta.path);
+const BUN = Bun.which("bun") ?? "bun";
 const SESSIONS_DIR = join(homedir(), ".omp", "agent", "sessions");
-const cutoffMs = Date.now() - parseInt(DAYS, 10) * 86_400_000;
+const cutoffMs = args.since ? parseInt(args.since, 10) : Date.now() - parseInt(DAYS, 10) * 86_400_000;
+const effectiveDays = args.since
+  ? String(Math.max(1, Math.ceil((Date.now() - cutoffMs) / 86_400_000)))
+  : DAYS;
 
 interface SessionEntry {
   type: string;
@@ -81,6 +86,7 @@ async function analyzeSessions(files: string[]) {
   const subagentByType = new Map<string, number>();
   const batchSizes = new Map<number, number>();
   const userShapes = new Map<string, number>();
+  const byProject = new Map<string, Map<string, number>>();
   let parallelBatches = 0;
   let assistantTurns = 0;
   let subagentInvocations = 0;
@@ -88,8 +94,19 @@ async function analyzeSessions(files: string[]) {
   let subFailed = 0;
   let subCancelled = 0;
   let entries = 0;
+  let compactionEvents = 0;
+  let sessionsWithCompaction = 0;
+  let rereadExtraCalls = 0;
+  let rereadUniquePaths = 0;
 
   for (const file of files) {
+    const project = basename(dirname(file)).replace(/^-/, "") || "unknown";
+    if (!byProject.has(project)) byProject.set(project, new Map());
+    const projectCounts = byProject.get(project)!;
+
+    const seenPaths = new Map<string, number>();
+    let fileCompactions = 0;
+
     for (const line of (await readFile(file, "utf8")).split("\n")) {
       if (!line.trim()) continue;
       let entry: SessionEntry;
@@ -99,6 +116,13 @@ async function analyzeSessions(files: string[]) {
         continue;
       }
       entries++;
+
+      if (entry.type === "branch_summary") {
+        fileCompactions++;
+        compactionEvents++;
+        continue;
+      }
+
       if (entry.type !== "message" || !entry.message) continue;
       const { role, content } = entry.message;
 
@@ -118,6 +142,11 @@ async function analyzeSessions(files: string[]) {
         for (const tc of tcs) {
           const name = tc.name ?? "?";
           toolCounts.set(name, (toolCounts.get(name) ?? 0) + 1);
+          projectCounts.set(name, (projectCounts.get(name) ?? 0) + 1);
+          if (name === "read" && typeof tc.arguments?.path === "string") {
+            const p = tc.arguments.path;
+            seenPaths.set(p, (seenPaths.get(p) ?? 0) + 1);
+          }
           if (name === "task") {
             subagentInvocations++;
             const agent = String(tc.arguments?.agent ?? "task");
@@ -142,6 +171,14 @@ async function analyzeSessions(files: string[]) {
         }
       }
     }
+
+    if (fileCompactions > 0) sessionsWithCompaction++;
+    for (const [, count] of seenPaths) {
+      if (count > 1) {
+        rereadExtraCalls += count - 1;
+        rereadUniquePaths++;
+      }
+    }
   }
 
   return {
@@ -161,36 +198,50 @@ async function analyzeSessions(files: string[]) {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 12)
       .map(([shape, count]) => ({ shape, count })),
+    compaction: { sessions: sessionsWithCompaction, totalEvents: compactionEvents },
+    rereads: { extraCalls: rereadExtraCalls, paths: rereadUniquePaths },
+    byProject: Object.fromEntries(
+      [...byProject.entries()].map(([p, m]) => [
+        p,
+        Object.fromEntries([...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8)),
+      ]),
+    ),
   };
 }
 
 const sessionFiles = await findSessionFiles();
 const session = await analyzeSessions(sessionFiles);
 
-const bashArgs = ["--days", DAYS];
+const bashArgs = ["--days", effectiveDays];
 if (args.json) bashArgs.push("--json");
 if (args["emit-rules"]) bashArgs.push("--emit-rules");
 
-const proc = Bun.spawn(["bun", join(BIN, "mine-bash-patterns.ts"), ...bashArgs], {
+const proc = Bun.spawn([BUN, join(BIN, "mine-bash-patterns.ts"), ...bashArgs], {
   stdout: "pipe",
   stderr: "pipe",
+  stdin: "ignore",
 });
-const bashOut = await new Response(proc.stdout).text();
-const bashErr = await new Response(proc.stderr).text();
+const [bashOut, bashErr] = await Promise.all([
+  new Response(proc.stdout).text(),
+  new Response(proc.stderr).text(),
+]);
 await proc.exited;
 
-const promptProc = Bun.spawn(["bun", join(BIN, "mine-prompt-patterns.ts"), "--days", DAYS, ...(args.json ? ["--json"] : [])], {
-  stdout: "pipe",
-  stderr: "pipe",
-});
-const promptOut = await new Response(promptProc.stdout).text();
+const promptProc = Bun.spawn(
+  [BUN, join(BIN, "mine-prompt-patterns.ts"), "--days", effectiveDays, ...(args.json ? ["--json"] : [])],
+  { stdout: "pipe", stderr: "pipe", stdin: "ignore" },
+);
+const [promptOut] = await Promise.all([
+  new Response(promptProc.stdout).text(),
+  new Response(promptProc.stderr).text(),
+]);
 await promptProc.exited;
 
 if (args.json) {
   console.log(
     JSON.stringify(
       {
-        meta: { days: parseInt(DAYS, 10), sessions: sessionFiles.length, entries: session.entries },
+        meta: { days: parseInt(effectiveDays, 10), since: cutoffMs, sessions: sessionFiles.length, entries: session.entries },
         session,
         bash: bashOut,
         prompts: promptOut,
@@ -203,8 +254,9 @@ if (args.json) {
 }
 
 console.log(`\n╔══════════════════════════════════════════════════════════╗`);
-console.log(`║  OMP /optimize report — last ${DAYS} days`);
-console.log(`║  ${sessionFiles.length} sessions, ${session.entries} entries`);
+const sinceLabel = args.since ? new Date(cutoffMs).toLocaleString() : `last ${DAYS} days`;
+console.log(`║  OMP /optimize report — ${sinceLabel}`);
+console.log(`║  ${sessionFiles.length} sessions (${session.compaction.sessions} compacted, ${session.compaction.totalEvents} events), ${session.entries} entries`);
 console.log(`╚══════════════════════════════════════════════════════════╝\n`);
 
 console.log("── Tool usage (from sessions) ──");
@@ -213,6 +265,9 @@ for (const [tool, count] of Object.entries(session.toolCounts).slice(0, 14)) {
   console.log(`  ${tool.padEnd(14)} ${count}${err ? ` (${err} err)` : ""}`);
 }
 console.log(`  parallel batches: ${session.parallelBatches} / ${session.assistantTurns} turns`);
+if (session.rereads.extraCalls > 0) {
+  console.log(`  re-reads:         ${session.rereads.extraCalls} extra read calls across ${session.rereads.paths} unique paths`);
+}
 
 console.log("\n── Subagents ──");
 console.log(`  task() calls: ${session.subagents.invocations}`);
@@ -222,6 +277,15 @@ if (session.subagents.invocations) {
   console.log(`  outcomes: ${JSON.stringify(session.subagents.outcomes)}`);
 } else if (session.assistantTurns > 15) {
   console.log("  ⚠ no task() usage — consider explore/task for broad or parallel work");
+}
+
+console.log("\n── Per-project breakdown ──");
+for (const [proj, counts] of Object.entries(session.byProject)) {
+  const top = Object.entries(counts)
+    .slice(0, 6)
+    .map(([t, n]) => `${t}:${n}`)
+    .join("  ");
+  console.log(`  ${proj.padEnd(28)} ${top}`);
 }
 
 if (session.userShapes.length) {
@@ -242,8 +306,20 @@ console.log("\n── Quick recommendations ──");
 const bash = (session.toolCounts.bash ?? 0) as number;
 const search = (session.toolCounts.search ?? 0) as number;
 const find = (session.toolCounts.find ?? 0) as number;
-if (bash > search + find) {
-  console.log(`  [medium] tool-hygiene: ${bash} bash vs ${search} search + ${find} find — enable bashInterceptor`);
+if (bash > 0 && bash >= (search + find) * 2 && bash >= 10) {
+  console.log(`  [medium] tool-hygiene: ${bash} bash vs ${search} search + ${find} find — check bash patterns for redirectable commands`);
+}
+const lsp = (session.toolCounts.lsp ?? 0) as number;
+const codeIntel = (session.toolCounts.read ?? 0) + search + (session.toolCounts.edit ?? 0) as number;
+if (codeIntel > 20 && lsp < codeIntel * 0.05) {
+  console.log(`  [high] tool-hygiene: lsp used ${lsp}x vs ${codeIntel} read+search+edit — definition/references/rename should go through lsp`);
+}
+if (session.compaction.sessions > 0) {
+  const pct = Math.round((session.compaction.sessions / sessionFiles.length) * 100);
+  console.log(`  [${pct >= 30 ? "high" : "medium"}] session-patterns: ${session.compaction.sessions}/${sessionFiles.length} sessions (${pct}%) hit compaction — consider shorter sessions or todo-tracking`);
+}
+if (session.rereads.extraCalls >= 5) {
+  console.log(`  [medium] tool-hygiene: ${session.rereads.extraCalls} redundant re-reads across ${session.rereads.paths} paths — read once, store in context`);
 }
 if (session.parallelBatches < session.assistantTurns * 0.12 && session.assistantTurns > 10) {
   console.log(`  [medium] parallelism: batch independent tool calls in single turns`);
