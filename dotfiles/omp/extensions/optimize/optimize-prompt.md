@@ -5,7 +5,7 @@ Mine your OMP usage history and return **actionable optimization candidates**. A
 ## Run the analyzer
 
 ```bash
-bun ~/Projects/mac-install/bin/optimize-report.ts
+bun ~/Projects/mac-install/dotfiles/omp/extensions/optimize/optimize-report.ts
 ```
 
 Optional flags:

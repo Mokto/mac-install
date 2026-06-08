@@ -16,6 +16,9 @@ brew bundle --file Brewfile || { echo "Error: Brewfile installation failed."; ex
 # Regular casks go to ~/Applications (no sudo needed for upgrades)
 HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications" brew bundle --file Brewfile.apps || { echo "Error: Brewfile.apps installation failed."; exit 1; }
 
+# Fix any casks that landed in /Applications instead of ~/Applications
+./bin/reinstall-casks.sh
+
 ln -sf "$(pwd)/dotfiles/.zshrc" "$HOME/.zshrc"
 ln -sf "$(pwd)/dotfiles/.zimrc" "$HOME/.zimrc"
 ln -sf "$(pwd)/dotfiles/zed.json" "$HOME/.config/zed/settings.json"
@@ -30,11 +33,12 @@ ln -sf "$(pwd)/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 mkdir -p "$HOME/.omp/agent"
 ln -sf "$(pwd)/dotfiles/omp/config.yml" "$HOME/.omp/agent/config.yml"
-mkdir -p "$HOME/.omp/agent/extensions"
+EXT_PATHS=""
 for ext in "$(pwd)/dotfiles/omp/extensions"/*/; do
-  name="$(basename "$ext")"
-  ln -sfn "$ext" "$HOME/.omp/agent/extensions/$name"
+  [ -n "$EXT_PATHS" ] && EXT_PATHS="${EXT_PATHS},"
+  EXT_PATHS="${EXT_PATHS}\"${ext}\""
 done
+printf '{"extensions":[%s]}' "$EXT_PATHS" > "$HOME/.omp/agent/settings.json"
 
 ./background/touchid.sh
 ./background/nodejs.sh
@@ -51,11 +55,3 @@ sed "s|/Users/theo/Projects/mac-install|$(pwd)|g" \
 launchctl unload "$IDLE_PLIST_DST" 2>/dev/null || true
 launchctl load "$IDLE_PLIST_DST"
 
-
-# # Install kill-idle-agents launchd service
-# PLIST_DST="$HOME/Library/LaunchAgents/com.theo.kill-idle-agents.plist"
-# mkdir -p "$HOME/Library/LaunchAgents"
-# sed "s|/Users/theo/Projects/mac-install|$(pwd)|g" \
-#   "$(pwd)/launchagents/com.theo.kill-idle-agents.plist" > "$PLIST_DST"
-# launchctl unload "$PLIST_DST" 2>/dev/null
-# launchctl load "$PLIST_DST"
