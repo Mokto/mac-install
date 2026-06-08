@@ -35,6 +35,7 @@ echo "export MAC_INSTALL_DIR=\"$(pwd)\"" > "$HOME/.mac-install.env"
 
 mkdir -p "$HOME/.omp/agent" "$HOME/.omp/agent/extensions"
 ln -sfh "$(pwd)/dotfiles/omp/config.yml" "$HOME/.omp/agent/config.yml"
+ln -sfh "$(pwd)/dotfiles/omp/user-agents.md" "$HOME/.omp/agent/AGENTS.md"
 ln -sfh "$(pwd)/dotfiles/omp/scripts" "$HOME/.omp/scripts"
 for ext in "$(pwd)/dotfiles/omp/extensions"/*/; do
   ext_name="$(basename "${ext%/}")"

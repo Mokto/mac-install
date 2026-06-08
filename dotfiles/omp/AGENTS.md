@@ -1,3 +1,23 @@
+# Oh My Pi (omp)
+
+[oh-my-pi](https://github.com/can1357/oh-my-pi) is a terminal coding agent with the IDE wired in.
+Fork of [Pi](https://github.com/badlogic/pi-mono) by @mariozechner.
+
+- **Harness:** hash-anchored edits (`edit`), in-process ripgrep/glob/find, persistent Python + Bun eval kernels that can call back into agent tools
+- **Code intelligence:** 13 LSP ops (rename, references, definition, diagnostics…) wired into every write
+- **Debugger:** 27 DAP ops — lldb, dlv, debugpy
+- **Subagents:** `task` fans out into isolated worktrees with schema-validated typed results
+- **Memory:** `retain`/`recall` + per-session compression (Hindsight)
+- **Stream rules:** regex match aborts mid-token, injects rule, retries — no context tax
+- **ACP:** runs inside Zed; same agent surface as the CLI TUI
+- **GitHub:** PRs/issues are paths; `read pr://N` works like `read` on local files
+- **Web:** `web_search` + `read <url>` over 14 providers; arxiv PDFs, GH pages, SO threads → structured markdown
+- **Models:** 40+ providers; prompts tuned per-model; 32 built-in tools
+- **Config:** reads Cursor MDC, Cline `.clinerules`, Codex `AGENTS.md`, Copilot `applyTo` natively
+
+Website: <https://omp.sh>
+---
+
 # OMP Extension Development — ACP Mode Learnings
 
 Lessons learned debugging `/optimize` hanging in Zed ACP (agent client protocol) mode
