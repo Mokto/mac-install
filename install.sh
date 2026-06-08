@@ -30,6 +30,11 @@ ln -sf "$(pwd)/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 mkdir -p "$HOME/.omp/agent"
 ln -sf "$(pwd)/dotfiles/omp/config.yml" "$HOME/.omp/agent/config.yml"
+mkdir -p "$HOME/.omp/agent/extensions"
+for ext in "$(pwd)/dotfiles/omp/extensions"/*/; do
+  name="$(basename "$ext")"
+  ln -sfn "$ext" "$HOME/.omp/agent/extensions/$name"
+done
 
 ./background/touchid.sh
 ./background/nodejs.sh
@@ -45,6 +50,7 @@ sed "s|/Users/theo/Projects/mac-install|$(pwd)|g" \
   "$(pwd)/launchagents/com.theo.brew-idle-upgrade.plist" > "$IDLE_PLIST_DST"
 launchctl unload "$IDLE_PLIST_DST" 2>/dev/null || true
 launchctl load "$IDLE_PLIST_DST"
+
 
 # # Install kill-idle-agents launchd service
 # PLIST_DST="$HOME/Library/LaunchAgents/com.theo.kill-idle-agents.plist"
