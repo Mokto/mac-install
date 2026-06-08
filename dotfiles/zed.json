@@ -13,10 +13,13 @@
     "dock": "right"
   },
   "agent_servers": {
-    "omp": {
+    "Oh My Pi": {
       "favorite_config_option_values": {
-        "mode": [
-          "default"
+        "mode": ["default"],
+        "model": [
+          "anthropic/claude-sonnet-4-6",
+          "anthropic/claude-opus-4-8",
+          "cursor/composer-2.5"
         ]
       },
       "default_config_options": {
@@ -24,7 +27,7 @@
         "thinking": "auto"
       },
       "type": "custom",
-      "command": "/Users/theo/.bun/bin/omp",
+      "command": "~/.bun/bin/omp",
       "args": ["acp"]
     },
     "cursor": {

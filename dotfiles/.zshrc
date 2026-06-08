@@ -45,16 +45,18 @@ connect() {
 }
 
 
-export KUBECONFIG=/Users/theo/Ocean/kubeconfig.yaml
+[ -f "$HOME/.mac-install.env" ] && source "$HOME/.mac-install.env"
+
+export KUBECONFIG=$HOME/Ocean/kubeconfig.yaml
 
 
-export PATH="/Users/theo/go/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 export PATH="/opt/homebrew/opt/go@1.23/bin:$PATH"
 export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-export PATH="/Users/theo/Projects/mac-install/bin:$PATH"
-export PATH="/Users/theo/.bun/bin:$PATH"
+export PATH="$MAC_INSTALL_DIR/bin:$PATH"
+export PATH="$HOME/.bun/bin:$PATH"
 
 
 export FIGMA_TOKEN=
@@ -62,7 +64,7 @@ export FIGMA_API_KEY=
 export GOOGLE_CLOUD_PROJECT_ID=oceanio-production
 
 # pnpm
-export PNPM_HOME="/Users/theo/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;

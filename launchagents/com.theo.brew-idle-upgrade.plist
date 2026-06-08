@@ -7,14 +7,14 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/theo/Projects/mac-install/bin/brew-idle-upgrade.sh</string>
+    <string>INSTALL_DIR/bin/brew-idle-upgrade.sh</string>
   </array>
   <key>StartInterval</key>
   <integer>1800</integer>
   <key>StandardOutPath</key>
-  <string>/Users/theo/Library/Logs/com.theo.brew-idle-upgrade.out</string>
+  <string>HOME_DIR/Library/Logs/com.theo.brew-idle-upgrade.out</string>
   <key>StandardErrorPath</key>
-  <string>/Users/theo/Library/Logs/com.theo.brew-idle-upgrade.out</string>
+  <string>HOME_DIR/Library/Logs/com.theo.brew-idle-upgrade.out</string>
   <key>LowPriorityBackgroundIO</key>
   <true/>
   <key>LowPriorityIO</key>

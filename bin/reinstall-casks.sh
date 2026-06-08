@@ -1,33 +1,53 @@
 #!/bin/bash
 set -euo pipefail
 
-# Reinstall all casks to ~/Applications to avoid needing sudo for upgrades.
-# System-level casks (drivers, CLI tools) are skipped.
+# Detect and fix casks installed to /Applications that should live in ~/Applications.
+# System-level casks (drivers, CLI tools) are intentionally kept in /Applications.
 
 APPDIR="$HOME/Applications"
 mkdir -p "$APPDIR"
 
-# Casks that install system drivers or CLI tools — skip appdir override
-SKIP=(displaylink fastmail zed)
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-casks=$(brew list --cask)
+MARKER_DIR="$HOME/.cache/mac-install/casks"
+mkdir -p "$MARKER_DIR"
+target_casks=()
+while IFS= read -r line; do
+    target_casks+=("$line")
+done < <(grep '^cask ' "$REPO_ROOT/Brewfile.apps" | sed 's/cask "\(.*\)"/\1/')
 
-for cask in $casks; do
-    for skip in "${SKIP[@]}"; do
-        if [[ "$cask" == "$skip" ]]; then
-            echo "Skipping $cask (system-level)"
-            continue 2
-        fi
-    done
+app_names() {
+    brew info --json=v2 --cask "$1" 2>/dev/null \
+        | jq -r '.casks[0].artifacts[] | select(has("app")) | .app[] | strings'
+}
 
-    echo "==> Reinstalling $cask"
-    if ! HOMEBREW_CASK_OPTS="--appdir=$APPDIR" brew reinstall --cask "$cask" 2>&1; then
-        echo "  Failed, retrying with sudo..."
-        sudo rm -rf "$APPDIR/${cask}.app" "/Applications/${cask}.app" 2>/dev/null || true
+needs_reinstall() {
+    local app
+    while IFS= read -r app; do
+        [[ -d "/Applications/$app" ]] && return 0
+    done < <(app_names "$1")
+    return 1
+}
+
+for cask in "${target_casks[@]}"; do
+    [[ -f "$MARKER_DIR/$cask" ]] && continue
+
+    brew list --cask "$cask" &>/dev/null || continue
+
+    if ! needs_reinstall "$cask"; then
+        echo "  $cask: ok"
+        touch "$MARKER_DIR/$cask"
+        continue
+    fi
+
+    echo "==> Fixing $cask (installed to /Applications, moving to ~/Applications)"
+    if ! HOMEBREW_CASK_OPTS="--appdir=$APPDIR" brew reinstall --cask "$cask"; then
+        echo "  Retrying with cleanup..."
+        while IFS= read -r app; do
+            sudo rm -rf "/Applications/$app" 2>/dev/null || true
+        done < <(app_names "$cask")
         HOMEBREW_CASK_OPTS="--appdir=$APPDIR" brew reinstall --cask "$cask"
     fi
+    touch "$MARKER_DIR/$cask"
 done
 
-echo ""
-echo "Done. Add this to ~/.zshrc to make it permanent:"
-echo '  export HOMEBREW_CASK_OPTS="--appdir=~/Applications"'
