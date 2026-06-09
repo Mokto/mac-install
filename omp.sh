@@ -9,6 +9,7 @@ mkdir -p "$HOME/.omp/agent" "$HOME/.omp/agent/extensions"
 ln -sfh "$(pwd)/dotfiles/omp/config.yml" "$HOME/.omp/agent/config.yml"
 ln -sfh "$(pwd)/dotfiles/omp/user-agents.md" "$HOME/.omp/agent/AGENTS.md"
 ln -sfh "$(pwd)/dotfiles/omp/scripts" "$HOME/.omp/scripts"
+ln -sfh "$(pwd)/dotfiles/omp/rules" "$HOME/.omp/agent/rules"
 for ext in "$(pwd)/dotfiles/omp/extensions"/*/; do
   ext_name="$(basename "${ext%/}")"
   mkdir -p "$HOME/.omp/agent/extensions/$ext_name"

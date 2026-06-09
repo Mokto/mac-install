@@ -32,7 +32,7 @@ goal:
 compaction:
   enabled: true
 ttsr:
-  enabled: false
+  enabled: true
 retry:
   enabled: true
 skills:
