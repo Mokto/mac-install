@@ -44,7 +44,7 @@ Only flag a miss if there's actual evidence from the session (e.g. many sequenti
 ### tool-hygiene
 Anti-patterns from the data: sequential reads that could be batched, high bash-to-search ratio, redundant re-reads of the same file.
 
-**Bash interceptor rules**: only raise this if a specific shell command pattern appears ≥5 times across sessions AND the redirect to a native tool is clearly better (not just possible). Include a suggested regex pattern if the signal is strong. Skip this entire sub-point if bash usage is low or patterns are varied.
+**Bash interceptor rules**: only raise this if a specific shell command pattern appears ≥5 times across sessions AND the redirect to a native tool is clearly better (not just possible). Include a suggested regex pattern if the signal is strong. Skip this entire sub-point if bash usage is low or patterns are varied. Note: `cat`, `head`, `tail`, `grep`, `rg`, `find`, `fd` are already intercepted by OMP's built-in stream rules — do not flag these as candidates regardless of their frequency in the report.
 
 ### config-tweaks
 Only if signal is strong and specific. E.g. a skill that's disabled but clearly would help, a model role that's missing. Do NOT suggest enabling `bashInterceptor` globally unless the bash-pattern analysis found multiple high-frequency, redirectable patterns.

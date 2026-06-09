@@ -170,6 +170,9 @@ const BINARY_RE = /^[a-zA-Z][a-zA-Z0-9_.-]*$/;
 // A valid bare subcommand word (no flags, paths, or specials)
 const SUBCMD_RE = /^[a-z][a-z0-9_-]{0,30}$/;
 
+// Shell interpreters: when invoked with -c, unwrap the inner command
+const SHELL_INTERPRETERS = new Set(["bash", "sh", "zsh", "dash", "ksh", "fish"]);
+
 /**
  * Split a command chain (&&, ;, ||) into individual segments.
  * Strips leading `cd <path>` segments since OMP canonicalizes those.
@@ -234,6 +237,26 @@ function normalize(segment: string): string {
     "ctx", "req", "res", "err", "then", "next", "done", "end",
   ]);
   if (NOISE.has(binary.toLowerCase())) return "";
+
+  // If this is a shell interpreter invoked with -c, unwrap and normalize the
+  // inner command. Quotes around the -c argument are literal in the raw string,
+  // so we rejoin tokens after -c and strip the outer quote characters.
+  if (SHELL_INTERPRETERS.has(binary.toLowerCase())) {
+    const cIdx = tokens.indexOf("-c");
+    if (cIdx !== -1) {
+      const innerRaw = tokens
+        .slice(cIdx + 1)
+        .join(" ")
+        .trim()
+        .replace(/^['"`]|['"`]$/g, "");
+      for (const seg of splitChain(innerRaw)) {
+        const shape = normalize(seg);
+        if (shape) return shape;
+      }
+    }
+    // bash/sh without -c (e.g. bash script.sh) — keep visible as "bash"
+    return binary.toLowerCase();
+  }
 
   // Optional subcommand: second token must be a plain bare word
   const rawSub = tokens[1] ?? "";

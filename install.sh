@@ -33,23 +33,11 @@ ln -sf "$(pwd)/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 echo "export MAC_INSTALL_DIR=\"$(pwd)\"" > "$HOME/.mac-install.env"
 
-mkdir -p "$HOME/.omp/agent" "$HOME/.omp/agent/extensions"
-ln -sfh "$(pwd)/dotfiles/omp/config.yml" "$HOME/.omp/agent/config.yml"
-ln -sfh "$(pwd)/dotfiles/omp/user-agents.md" "$HOME/.omp/agent/AGENTS.md"
-ln -sfh "$(pwd)/dotfiles/omp/scripts" "$HOME/.omp/scripts"
-for ext in "$(pwd)/dotfiles/omp/extensions"/*/; do
-  ext_name="$(basename "${ext%/}")"
-  mkdir -p "$HOME/.omp/agent/extensions/$ext_name"
-  for file in "$ext"*; do
-    [[ -L "$file" ]] && continue
-    ln -sfh "$file" "$HOME/.omp/agent/extensions/$ext_name/$(basename "$file")"
-  done
-done
+./omp.sh
 
 ./background/touchid.sh
 ./background/nodejs.sh
 ./background/zsh.sh
-./background/omp.sh
 
 ./dock.sh
 
