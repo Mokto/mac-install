@@ -27,7 +27,7 @@
         "thinking": "auto"
       },
       "type": "custom",
-      "command": "~/.bun/bin/omp",
+      "command": "omp",
       "args": ["acp"]
     },
     "cursor": {

@@ -33,6 +33,10 @@ ln -sf "$(pwd)/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 echo "export MAC_INSTALL_DIR=\"$(pwd)\"" > "$HOME/.mac-install.env"
 
+if ! command -v omp >/dev/null; then
+  echo "Installing oh-my-pi (omp)..."
+  bun install -g @oh-my-pi/pi-coding-agent
+fi
 ./omp.sh
 
 ./background/touchid.sh
@@ -48,4 +52,3 @@ sed "s|INSTALL_DIR|$(pwd)|g; s|HOME_DIR|$HOME|g" \
   "$(pwd)/launchagents/com.theo.brew-idle-upgrade.plist" > "$IDLE_PLIST_DST"
 launchctl unload "$IDLE_PLIST_DST" 2>/dev/null || true
 launchctl load "$IDLE_PLIST_DST"
-

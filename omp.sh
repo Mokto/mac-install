@@ -1,10 +1,5 @@
 #!/bin/zsh
 
-if ! command -v omp >/dev/null; then
-  echo "Installing oh-my-pi (omp)..."
-  bun install -g @oh-my-pi/pi-coding-agent
-fi
-
 mkdir -p "$HOME/.omp/agent" "$HOME/.omp/agent/extensions"
 ln -sfh "$(pwd)/dotfiles/omp/config.yml" "$HOME/.omp/agent/config.yml"
 ln -sfh "$(pwd)/dotfiles/omp/user-agents.md" "$HOME/.omp/agent/AGENTS.md"
