@@ -39,6 +39,8 @@ When `task()` was used well (agent type, batch width, outcome) vs missed opportu
 - Mechanical find-replace → `quick_task`
 - Architecture decisions → `plan` or `oracle`
 
+**Failure rate**: the `outcomes` line shows `completed / failed / cancelled`. If ≥25% failed (quick-rec will flag it), investigate the agent type breakdown — `explore` failures suggest over-scoped assignments; `task` failures suggest unclear context or missing contract. Flag if evidence supports a clear fix.
+
 Only flag a miss if there's actual evidence from the session (e.g. many sequential single-file reads with no task() call).
 
 ### tool-hygiene
@@ -49,6 +51,15 @@ Anti-patterns from the data: sequential reads that could be batched, high bash-t
 ### config-tweaks
 Only if signal is strong and specific. E.g. a skill that's disabled but clearly would help, a model role that's missing. Do NOT suggest enabling `bashInterceptor` globally unless the bash-pattern analysis found multiple high-frequency, redirectable patterns.
 
+### token-efficiency
+From the `── Token consumption ──` section:
+- **Total cost**: report the total and per-model breakdown if multiple models appear.
+- **Cache hit rate**: `cache-read / total input`. Below 30% is flagged `⚠ low` — short-lived sessions or frequent session restarts are the usual cause. Above 70% is `✓ good`.
+- **Context/turn (p50/p90)**: the report now shows median (p50) and p90 context size. Use p50 for the flag threshold: above 25k median is worth noting; above 50k median is a `[high]` flag — sessions run too long, accumulating context that never gets shed. The p90 shows the worst sessions; if p90 >> p50, a few long outlier sessions are skewing the cost.
+- **Thinking turns %**: if >85% of turns have a thinking block and total cost > $1, flag it — thinking at `high` level on routine tasks (edits, lookups) is expensive and often unnecessary.
+- **Cost per turn**: `totalCost / turns`. If cost/turn is high (>$0.10) and session count is large, the pattern is worth calling out with a concrete number.
+
+Only raise candidates that differ from the baseline or have a clear, actionable fix. Skip if the token section shows "(no usage data)".
 ## Output format
 
 For each candidate:

@@ -17,7 +17,6 @@ Fork of [Pi](https://github.com/badlogic/pi-mono) by @mariozechner.
 
 Website: <https://omp.sh>
 ---
-
 # OMP Extension Development — ACP Mode Learnings
 
 Lessons learned debugging `/optimize` hanging in Zed ACP (agent client protocol) mode

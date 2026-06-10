@@ -1,10 +1,10 @@
 modelRoles:
   default: claude-sonnet-4-6
 enabledModels:
-  - claude-opus-4-8
-  - claude-sonnet-4-6
-  - composer-2.5
-tools: 
+  - anthropic/claude-opus-4-8
+  - anthropic/claude-sonnet-4-6
+  - cursor/composer-2.5
+tools:
   approvalMode: yolo
   discoveryMode: auto
   approval:
