@@ -22,7 +22,9 @@ const { values: args } = parseArgs({
 });
 
 if (args.help) {
-  console.log("Usage: bun optimize-report.ts [--days 30] [--since <unix-ms>] [--json] [--emit-rules]");
+  console.log(
+    "Usage: bun optimize-report.ts [--days 30] [--since <unix-ms>] [--json] [--emit-rules]",
+  );
   process.exit(0);
 }
 
@@ -30,7 +32,9 @@ const DAYS = args.days ?? "30";
 const BIN = dirname(import.meta.path);
 const BUN = Bun.which("bun") ?? "bun";
 const SESSIONS_DIR = join(homedir(), ".omp", "agent", "sessions");
-const cutoffMs = args.since ? parseInt(args.since, 10) : Date.now() - parseInt(DAYS, 10) * 86_400_000;
+const cutoffMs = args.since
+  ? parseInt(args.since, 10)
+  : Date.now() - parseInt(DAYS, 10) * 86_400_000;
 const effectiveDays = args.since
   ? String(Math.max(1, Math.ceil((Date.now() - cutoffMs) / 86_400_000)))
   : DAYS;
@@ -54,7 +58,13 @@ interface SessionEntry {
   type: string;
   message?: {
     role?: string;
-    content?: Array<{ type?: string; name?: string; arguments?: Record<string, unknown>; text?: string; thinking?: string }>;
+    content?: Array<{
+      type?: string;
+      name?: string;
+      arguments?: Record<string, unknown>;
+      text?: string;
+      thinking?: string;
+    }>;
     toolName?: string;
     isError?: boolean;
     usage?: Usage;
@@ -91,7 +101,10 @@ function promptShape(prompt: string): string {
   let s = prompt.trim();
   if (s.startsWith("/")) return s.split(/\s+/)[0] ?? s;
   s = s.toLowerCase().replace(/[`'"]/g, "");
-  s = s.replace(/\b(?:the|a|an|please|can you|could you|help me|show me)\b/g, " ");
+  s = s.replace(
+    /\b(?:the|a|an|please|can you|could you|help me|show me)\b/g,
+    " ",
+  );
   s = s.replace(/https?:\/\/\S+/g, " URL ");
   s = s.replace(/\/[\w./-]+/g, " PATH ");
   s = s.replace(/\s+/g, " ").trim();
@@ -122,10 +135,20 @@ async function analyzeSessions(files: string[]) {
   let tokCacheRead = 0;
   let tokCacheWrite = 0;
   let tokCost = 0;
-  let tokTurns = 0;       // turns that have usage data
-  let thinkingTurns = 0;  // turns with at least one thinking block
-  const tokByModel = new Map<string, { input: number; output: number; cacheRead: number; cacheWrite: number; cost: number; turns: number }>();
-  const tokPerTurn: number[] = [];  // (input + cacheRead) per turn, for median
+  let tokTurns = 0; // turns that have usage data
+  let thinkingTurns = 0; // turns with at least one thinking block
+  const tokByModel = new Map<
+    string,
+    {
+      input: number;
+      output: number;
+      cacheRead: number;
+      cacheWrite: number;
+      cost: number;
+      turns: number;
+    }
+  >();
+  const tokPerTurn: number[] = []; // (input + cacheRead) per turn, for median
 
   for (const file of files) {
     const project = basename(dirname(file)).replace(/^-/, "") || "unknown";
@@ -158,7 +181,8 @@ async function analyzeSessions(files: string[]) {
         for (const b of content) {
           if (b.type === "text" && b.text && b.text.length <= 500) {
             const shape = promptShape(b.text);
-            if (shape.length > 1) userShapes.set(shape, (userShapes.get(shape) ?? 0) + 1);
+            if (shape.length > 1)
+              userShapes.set(shape, (userShapes.get(shape) ?? 0) + 1);
           }
         }
       }
@@ -196,7 +220,14 @@ async function analyzeSessions(files: string[]) {
           tokCost += u.cost.total ?? 0;
           tokPerTurn.push(turnInput);
           const model = entry.message.model ?? "unknown";
-          const mb = tokByModel.get(model) ?? { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, cost: 0, turns: 0 };
+          const mb = tokByModel.get(model) ?? {
+            input: 0,
+            output: 0,
+            cacheRead: 0,
+            cacheWrite: 0,
+            cost: 0,
+            turns: 0,
+          };
           mb.input += u.input ?? 0;
           mb.output += u.output ?? 0;
           mb.cacheRead += u.cacheRead ?? 0;
@@ -206,13 +237,22 @@ async function analyzeSessions(files: string[]) {
           tokByModel.set(model, mb);
         }
         // thinking detection
-        if (content.some((b) => b.type === "thinking" && b.thinking)) thinkingTurns++;
+        if (content.some((b) => b.type === "thinking" && b.thinking))
+          thinkingTurns++;
       }
 
       if (role === "toolResult") {
         if (entry.message.isError) {
           const tn = entry.message.toolName ?? "?";
-          toolErrors.set(tn, (toolErrors.get(tn) ?? 0) + 1);
+          // Skip truncated-output entries — isError=true on truncated output is a
+          // false positive; the tool succeeded, the output was just clipped.
+          const contentText = (entry.message.content ?? [])
+            .filter((b: { type: string }) => b.type === "text")
+            .map((b: { text?: string }) => b.text ?? "")
+            .join("");
+          if (!/^\[Output truncated/i.test(contentText.trimStart())) {
+            toolErrors.set(tn, (toolErrors.get(tn) ?? 0) + 1);
+          }
         }
         if (entry.message.toolName === "task") {
           const blob = JSON.stringify(entry.message.content ?? "");
@@ -234,7 +274,9 @@ async function analyzeSessions(files: string[]) {
 
   return {
     entries,
-    toolCounts: Object.fromEntries([...toolCounts.entries()].sort((a, b) => b[1] - a[1])),
+    toolCounts: Object.fromEntries(
+      [...toolCounts.entries()].sort((a, b) => b[1] - a[1]),
+    ),
     toolErrors: Object.fromEntries(toolErrors),
     parallelBatches,
     assistantTurns,
@@ -242,19 +284,28 @@ async function analyzeSessions(files: string[]) {
       invocations: subagentInvocations,
       byAgent: Object.fromEntries(subagentByType),
       batchSizes: Object.fromEntries(batchSizes),
-      outcomes: { completed: subCompleted, failed: subFailed, cancelled: subCancelled },
+      outcomes: {
+        completed: subCompleted,
+        failed: subFailed,
+        cancelled: subCancelled,
+      },
     },
     userShapes: [...userShapes.entries()]
       .filter(([, c]) => c >= 2)
       .sort((a, b) => b[1] - a[1])
       .slice(0, 12)
       .map(([shape, count]) => ({ shape, count })),
-    compaction: { sessions: sessionsWithCompaction, totalEvents: compactionEvents },
+    compaction: {
+      sessions: sessionsWithCompaction,
+      totalEvents: compactionEvents,
+    },
     rereads: { extraCalls: rereadExtraCalls, paths: rereadUniquePaths },
     byProject: Object.fromEntries(
       [...byProject.entries()].map(([p, m]) => [
         p,
-        Object.fromEntries([...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8)),
+        Object.fromEntries(
+          [...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8),
+        ),
       ]),
     ),
     tokens: {
@@ -265,11 +316,23 @@ async function analyzeSessions(files: string[]) {
       totalCost: tokCost,
       turns: tokTurns,
       thinkingTurns,
-      avgInputPerTurn: tokTurns > 0 ? Math.round((tokInput + tokCacheRead) / tokTurns) : 0,
-      medianInputPerTurn: (() => { const s = tokPerTurn.slice().sort((a, b) => a - b); return s.length ? s[Math.floor(s.length / 2)]! : 0; })(),
-      p90InputPerTurn: (() => { const s = tokPerTurn.slice().sort((a, b) => a - b); return s.length ? s[Math.floor(s.length * 0.9)]! : 0; })(),
-      cacheHitRate: (tokInput + tokCacheRead) > 0 ? tokCacheRead / (tokInput + tokCacheRead) : 0,
-      byModel: Object.fromEntries([...tokByModel.entries()].sort((a, b) => b[1].cost - a[1].cost)),
+      avgInputPerTurn:
+        tokTurns > 0 ? Math.round((tokInput + tokCacheRead) / tokTurns) : 0,
+      medianInputPerTurn: (() => {
+        const s = tokPerTurn.slice().sort((a, b) => a - b);
+        return s.length ? s[Math.floor(s.length / 2)]! : 0;
+      })(),
+      p90InputPerTurn: (() => {
+        const s = tokPerTurn.slice().sort((a, b) => a - b);
+        return s.length ? s[Math.floor(s.length * 0.9)]! : 0;
+      })(),
+      cacheHitRate:
+        tokInput + tokCacheRead > 0
+          ? tokCacheRead / (tokInput + tokCacheRead)
+          : 0,
+      byModel: Object.fromEntries(
+        [...tokByModel.entries()].sort((a, b) => b[1].cost - a[1].cost),
+      ),
     },
   };
 }
@@ -293,7 +356,13 @@ const [bashOut, bashErr] = await Promise.all([
 await proc.exited;
 
 const promptProc = Bun.spawn(
-  [BUN, join(BIN, "mine-prompt-patterns.ts"), "--days", effectiveDays, ...(args.json ? ["--json"] : [])],
+  [
+    BUN,
+    join(BIN, "mine-prompt-patterns.ts"),
+    "--days",
+    effectiveDays,
+    ...(args.json ? ["--json"] : []),
+  ],
   { stdout: "pipe", stderr: "pipe", stdin: "ignore" },
 );
 const [promptOut] = await Promise.all([
@@ -306,7 +375,12 @@ if (args.json) {
   console.log(
     JSON.stringify(
       {
-        meta: { days: parseInt(effectiveDays, 10), since: cutoffMs, sessions: sessionFiles.length, entries: session.entries },
+        meta: {
+          days: parseInt(effectiveDays, 10),
+          since: cutoffMs,
+          sessions: sessionFiles.length,
+          entries: session.entries,
+        },
         session,
         bash: bashOut,
         prompts: promptOut,
@@ -319,9 +393,13 @@ if (args.json) {
 }
 
 console.log(`\n╔══════════════════════════════════════════════════════════╗`);
-const sinceLabel = args.since ? new Date(cutoffMs).toLocaleString() : `last ${DAYS} days`;
+const sinceLabel = args.since
+  ? new Date(cutoffMs).toLocaleString()
+  : `last ${DAYS} days`;
 console.log(`║  OMP /optimize report — ${sinceLabel}`);
-console.log(`║  ${sessionFiles.length} sessions (${session.compaction.sessions} compacted, ${session.compaction.totalEvents} events), ${session.entries} entries`);
+console.log(
+  `║  ${sessionFiles.length} sessions (${session.compaction.sessions} compacted, ${session.compaction.totalEvents} events), ${session.entries} entries`,
+);
 console.log(`╚══════════════════════════════════════════════════════════╝\n`);
 
 console.log("── Tool usage (from sessions) ──");
@@ -329,9 +407,13 @@ for (const [tool, count] of Object.entries(session.toolCounts).slice(0, 14)) {
   const err = session.toolErrors[tool];
   console.log(`  ${tool.padEnd(14)} ${count}${err ? ` (${err} err)` : ""}`);
 }
-console.log(`  parallel batches: ${session.parallelBatches} / ${session.assistantTurns} turns`);
+console.log(
+  `  parallel batches: ${session.parallelBatches} / ${session.assistantTurns} turns`,
+);
 if (session.rereads.extraCalls > 0) {
-  console.log(`  re-reads:         ${session.rereads.extraCalls} extra read calls across ${session.rereads.paths} unique paths`);
+  console.log(
+    `  re-reads:         ${session.rereads.extraCalls} extra read calls across ${session.rereads.paths} unique paths`,
+  );
 }
 
 console.log("\n── Subagents ──");
@@ -342,9 +424,13 @@ if (session.subagents.invocations) {
   const failLabel = failed > 0 ? `  ⚠ ${failPct}% failed` : "";
   console.log(`  agents: ${JSON.stringify(session.subagents.byAgent)}`);
   console.log(`  batch sizes: ${JSON.stringify(session.subagents.batchSizes)}`);
-  console.log(`  outcomes: completed=${completed}  failed=${failed}  cancelled=${cancelled}${failLabel}`);
+  console.log(
+    `  outcomes: completed=${completed}  failed=${failed}  cancelled=${cancelled}${failLabel}`,
+  );
 } else if (session.assistantTurns > 15) {
-  console.log("  ⚠ no task() usage — consider explore/task for broad or parallel work");
+  console.log(
+    "  ⚠ no task() usage — consider explore/task for broad or parallel work",
+  );
 }
 
 console.log("\n── Per-project breakdown ──");
@@ -359,7 +445,9 @@ for (const [proj, counts] of Object.entries(session.byProject)) {
 if (session.userShapes.length) {
   console.log("\n── Repeated user prompts (sessions) ──");
   for (const { shape, count } of session.userShapes) {
-    console.log(`  ${shape.padEnd(32)} ${count}x  → skill/slash-command candidate`);
+    console.log(
+      `  ${shape.padEnd(32)} ${count}x  → skill/slash-command candidate`,
+    );
   }
 }
 
@@ -376,25 +464,47 @@ if (tok.turns === 0) {
   console.log("  (no usage data — older sessions may predate usage recording)");
 } else {
   const fmt$ = (n: number) => `$${n.toFixed(4)}`;
-  const fmtK = (n: number) => n >= 1_000_000 ? `${(n / 1_000_000).toFixed(2)}M` : n >= 1_000 ? `${(n / 1_000).toFixed(1)}k` : String(n);
+  const fmtK = (n: number) =>
+    n >= 1_000_000
+      ? `${(n / 1_000_000).toFixed(2)}M`
+      : n >= 1_000
+        ? `${(n / 1_000).toFixed(1)}k`
+        : String(n);
   const totalIn = tok.input + tok.cacheRead;
-  console.log(`  cost:              ${fmt$(tok.totalCost)}  (${tok.turns} turns with data)`);
-  console.log(`  input tokens:      ${fmtK(totalIn)}  (${fmtK(tok.input)} uncached + ${fmtK(tok.cacheRead)} cache-read)`);
+  console.log(
+    `  cost:              ${fmt$(tok.totalCost)}  (${tok.turns} turns with data)`,
+  );
+  console.log(
+    `  input tokens:      ${fmtK(totalIn)}  (${fmtK(tok.input)} uncached + ${fmtK(tok.cacheRead)} cache-read)`,
+  );
   console.log(`  output tokens:     ${fmtK(tok.output)}`);
   console.log(`  cache writes:      ${fmtK(tok.cacheWrite)}`);
   const hitPct = Math.round(tok.cacheHitRate * 100);
-  const hitLabel = tok.cacheHitRate < 0.3 ? "⚠ low" : tok.cacheHitRate >= 0.7 ? "✓ good" : "ok";
-  console.log(`  cache hit rate:    ${hitPct}%  [${hitLabel}]  (cache-read / total input)`);
-  console.log(`  context/turn:      p50 ${fmtK(tok.medianInputPerTurn)}  p90 ${fmtK(tok.p90InputPerTurn)}  avg ${fmtK(tok.avgInputPerTurn)} tokens`);
+  const hitLabel =
+    tok.cacheHitRate < 0.3
+      ? "⚠ low"
+      : tok.cacheHitRate >= 0.7
+        ? "✓ good"
+        : "ok";
+  console.log(
+    `  cache hit rate:    ${hitPct}%  [${hitLabel}]  (cache-read / total input)`,
+  );
+  console.log(
+    `  context/turn:      p50 ${fmtK(tok.medianInputPerTurn)}  p90 ${fmtK(tok.p90InputPerTurn)}  avg ${fmtK(tok.avgInputPerTurn)} tokens`,
+  );
   if (tok.thinkingTurns > 0) {
     const thinkPct = Math.round((tok.thinkingTurns / tok.turns) * 100);
-    console.log(`  thinking turns:    ${tok.thinkingTurns} / ${tok.turns} (${thinkPct}%)`);
+    console.log(
+      `  thinking turns:    ${tok.thinkingTurns} / ${tok.turns} (${thinkPct}%)`,
+    );
   }
   const models = Object.entries(tok.byModel);
   if (models.length > 1) {
     console.log("  by model:");
     for (const [model, m] of models) {
-      console.log(`    ${model.padEnd(36)} ${fmt$(m.cost).padStart(10)}  ${m.turns} turns`);
+      console.log(
+        `    ${model.padEnd(36)} ${fmt$(m.cost).padStart(10)}  ${m.turns} turns`,
+      );
     }
   }
 }
@@ -404,46 +514,83 @@ const bash = (session.toolCounts.bash ?? 0) as number;
 const search = (session.toolCounts.search ?? 0) as number;
 const find = (session.toolCounts.find ?? 0) as number;
 if (bash > 0 && bash >= (search + find) * 2 && bash >= 10) {
-  console.log(`  [medium] tool-hygiene: ${bash} bash vs ${search} search + ${find} find — check bash patterns for redirectable commands`);
+  console.log(
+    `  [medium] tool-hygiene: ${bash} bash vs ${search} search + ${find} find — check bash patterns for redirectable commands`,
+  );
 }
 const lsp = (session.toolCounts.lsp ?? 0) as number;
-const codeIntel = (session.toolCounts.read ?? 0) + search + (session.toolCounts.edit ?? 0) as number;
+const codeIntel = ((session.toolCounts.read ?? 0) +
+  search +
+  (session.toolCounts.edit ?? 0)) as number;
 if (codeIntel > 20 && lsp < codeIntel * 0.05) {
-  console.log(`  [high] tool-hygiene: lsp used ${lsp}x vs ${codeIntel} read+search+edit — definition/references/rename should go through lsp`);
+  console.log(
+    `  [high] tool-hygiene: lsp used ${lsp}x vs ${codeIntel} read+search+edit — definition/references/rename should go through lsp`,
+  );
 }
 if (session.compaction.sessions > 0) {
-  const pct = Math.round((session.compaction.sessions / sessionFiles.length) * 100);
-  console.log(`  [${pct >= 30 ? "high" : "medium"}] session-patterns: ${session.compaction.sessions}/${sessionFiles.length} sessions (${pct}%) hit compaction — consider shorter sessions or todo-tracking`);
+  const pct = Math.round(
+    (session.compaction.sessions / sessionFiles.length) * 100,
+  );
+  console.log(
+    `  [${pct >= 30 ? "high" : "medium"}] session-patterns: ${session.compaction.sessions}/${sessionFiles.length} sessions (${pct}%) hit compaction — consider shorter sessions or todo-tracking`,
+  );
 }
 if (session.rereads.extraCalls >= 5) {
-  console.log(`  [medium] tool-hygiene: ${session.rereads.extraCalls} redundant re-reads across ${session.rereads.paths} paths — read once, store in context`);
+  console.log(
+    `  [medium] tool-hygiene: ${session.rereads.extraCalls} redundant re-reads across ${session.rereads.paths} paths — read once, store in context`,
+  );
 }
-if (session.parallelBatches < session.assistantTurns * 0.12 && session.assistantTurns > 10) {
-  console.log(`  [medium] parallelism: batch independent tool calls in single turns`);
+if (
+  session.parallelBatches < session.assistantTurns * 0.12 &&
+  session.assistantTurns > 10
+) {
+  console.log(
+    `  [medium] parallelism: batch independent tool calls in single turns`,
+  );
 }
 const subFailed_ = session.subagents.outcomes.failed;
 const subInv_ = session.subagents.invocations;
 if (subInv_ >= 5 && subFailed_ / subInv_ >= 0.25) {
   const pct = Math.round((subFailed_ / subInv_) * 100);
-  console.log(`  [${pct >= 40 ? "high" : "medium"}] subagent-playbook: ${subFailed_}/${subInv_} (${pct}%) subagent calls failed — review agent type selection and assignment clarity`);
+  console.log(
+    `  [${pct >= 40 ? "high" : "medium"}] subagent-playbook: ${subFailed_}/${subInv_} (${pct}%) subagent calls failed — review agent type selection and assignment clarity`,
+  );
 }
 for (const { shape, count } of session.userShapes.slice(0, 3)) {
   if (!shape.startsWith("/")) {
-    console.log(`  [${count >= 3 ? "high" : "medium"}] prompt-shortcut: "${shape}" (${count}x)`);
+    console.log(
+      `  [${count >= 3 ? "high" : "medium"}] prompt-shortcut: "${shape}" (${count}x)`,
+    );
   }
 }
 if (tok.turns >= 10) {
   if (tok.cacheHitRate < 0.3) {
-    const potentialSavings = ((0.7 - tok.cacheHitRate) * (tok.input + tok.cacheRead) * 0.000003).toFixed(3);
-    console.log(`  [medium] token-efficiency: cache hit rate ${Math.round(tok.cacheHitRate * 100)}% — keep long-running sessions alive longer or use /checkpoint to warm the cache; potential savings if rate reaches 70%: ~$${potentialSavings}`);
+    const potentialSavings = (
+      (0.7 - tok.cacheHitRate) *
+      (tok.input + tok.cacheRead) *
+      0.000003
+    ).toFixed(3);
+    console.log(
+      `  [medium] token-efficiency: cache hit rate ${Math.round(tok.cacheHitRate * 100)}% — keep long-running sessions alive longer or use /checkpoint to warm the cache; potential savings if rate reaches 70%: ~$${potentialSavings}`,
+    );
   }
   if (tok.medianInputPerTurn > 50_000) {
-    console.log(`  [high] token-efficiency: median context ${Math.round(tok.medianInputPerTurn / 1000)}k tokens/turn (p90: ${Math.round(tok.p90InputPerTurn / 1000)}k) — sessions run too long; use /checkpoint+rewind or split work into shorter sessions`);
+    console.log(
+      `  [high] token-efficiency: median context ${Math.round(tok.medianInputPerTurn / 1000)}k tokens/turn (p90: ${Math.round(tok.p90InputPerTurn / 1000)}k) — sessions run too long; use /checkpoint+rewind or split work into shorter sessions`,
+    );
   } else if (tok.medianInputPerTurn > 25_000) {
-    console.log(`  [medium] token-efficiency: median context ${Math.round(tok.medianInputPerTurn / 1000)}k tokens/turn — moderate growth; watch for compaction`);
+    console.log(
+      `  [medium] token-efficiency: median context ${Math.round(tok.medianInputPerTurn / 1000)}k tokens/turn — moderate growth; watch for compaction`,
+    );
   }
-  if (tok.thinkingTurns > 0 && tok.thinkingTurns / tok.turns > 0.85 && tok.totalCost > 1) {
-    console.log(`  [medium] token-efficiency: thinking active in ${Math.round((tok.thinkingTurns / tok.turns) * 100)}% of turns — consider setting thinking level to "low" for routine tasks (file edits, lookups) to reduce output tokens`);
+  if (
+    tok.thinkingTurns > 0 &&
+    tok.thinkingTurns / tok.turns > 0.85 &&
+    tok.totalCost > 1
+  ) {
+    console.log(
+      `  [medium] token-efficiency: thinking active in ${Math.round((tok.thinkingTurns / tok.turns) * 100)}% of turns — consider setting thinking level to "low" for routine tasks (file edits, lookups) to reduce output tokens`,
+    );
   }
 }
 console.log();
