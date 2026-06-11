@@ -21,6 +21,7 @@ HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications" brew bundle --file Brewfile.app
 
 ln -sf "$(pwd)/dotfiles/.zshrc" "$HOME/.zshrc"
 ln -sf "$(pwd)/dotfiles/.zimrc" "$HOME/.zimrc"
+ln -sf "$(pwd)/dotfiles/.p10k.zsh" "$HOME/.p10k.zsh"
 ln -sf "$(pwd)/dotfiles/zed.json" "$HOME/.config/zed/settings.json"
 ln -sf "$(pwd)/dotfiles/zed-keymap.json" "$HOME/.config/zed/keymap.json"
 ln -sf "$(pwd)/dotfiles/.gitconfig" "$HOME/.gitconfig"
