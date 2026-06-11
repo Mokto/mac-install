@@ -33,12 +33,6 @@ ln -sf "$(pwd)/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 echo "export MAC_INSTALL_DIR=\"$(pwd)\"" > "$HOME/.mac-install.env"
 
-if ! command -v omp >/dev/null; then
-  echo "Installing oh-my-pi (omp)..."
-  bun install -g @oh-my-pi/pi-coding-agent
-fi
-./omp.sh
-
 ./background/touchid.sh
 ./background/nodejs.sh
 ./background/zsh.sh

@@ -13,35 +13,15 @@
     "dock": "right"
   },
   "agent_servers": {
-    "Oh My Pi": {
-      "favorite_config_option_values": {
-        "mode": ["default"],
-        "model": [
-          "anthropic/claude-sonnet-4-6",
-          "anthropic/claude-opus-4-8",
-          "cursor/composer-2.5"
-        ]
-      },
+    "pi-acp": {
       "default_config_options": {
-        "model": "anthropic/claude-sonnet-4-6",
-        "thinking": "auto"
+        "model": "anthropic/claude-sonnet-4-6"
       },
+      "default_model": "anthropic/claude-sonnet-4-6",
       "type": "custom",
-      "command": "omp",
-      "args": ["acp"]
-    },
-    "cursor": {
-      "type": "registry"
-    },
-    "gemini": {
-      "default_mode": "yolo",
-      "default_config_options": {
-        "approvalMode": "yolo"
-      },
-      "favorite_config_option_values": {
-        "approvalMode": ["yolo"]
-      },
-      "type": "registry"
+      "command": "node",
+      "args": ["/Users/theo/Projects/pi-acp/dist/index.js"],
+      "env": {}
     },
     "claude-acp": {
       "favorite_config_option_values": {
@@ -54,17 +34,6 @@
       "default_mode": "bypassPermissions",
       "env": {
         "ANTHROPIC_MODEL": "sonnet"
-      },
-      "type": "registry"
-    },
-    "codex-acp": {
-      "default_config_options": {
-        "approval_policy": "never",
-        "sandbox_mode": "danger-full-access"
-      },
-      "favorite_config_option_values": {
-        "approval_policy": ["never"],
-        "sandbox_mode": ["danger-full-access"]
       },
       "type": "registry"
     }

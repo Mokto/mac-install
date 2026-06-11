@@ -41,5 +41,11 @@
     "bindings": {
       "cmd-1": "project_panel::ToggleFocus"
     }
+  },
+  {
+    "context": "GitPanel",
+    "bindings": {
+      "cmd-6": "git_panel::ActivateHistoryTab"
+    }
   }
 ]

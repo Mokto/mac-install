@@ -2,9 +2,6 @@ zmodule zimfw/completion
 zmodule zimfw/git
 zmodule zimfw/input
 zmodule zimfw/utility
-zmodule zimfw/prompt
-zmodule prompt-pwd
-zmodule git-info
-zmodule agnoster
+zmodule romkatv/powerlevel10k
 zmodule zsh-users/zsh-autosuggestions
-zmodule zsh-users/zsh-syntax-highlighting
+zmodule zdharma-continuum/fast-syntax-highlighting
