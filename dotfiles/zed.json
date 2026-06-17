@@ -19,9 +19,10 @@
       },
       "default_model": "anthropic/claude-sonnet-4-6",
       "type": "custom",
-      "command": "node",
-      "args": ["/Users/theo/Projects/pi-acp/dist/index.js"],
-      "env": {}
+      "command": "pi-acp",
+      "env": {
+        "PI_ACP_SHOW_SESSION_ID": true
+      }
     },
     "claude-acp": {
       "favorite_config_option_values": {

@@ -47,3 +47,5 @@ sed "s|INSTALL_DIR|$(pwd)|g; s|HOME_DIR|$HOME|g" \
   "$(pwd)/launchagents/com.theo.brew-idle-upgrade.plist" > "$IDLE_PLIST_DST"
 launchctl unload "$IDLE_PLIST_DST" 2>/dev/null || true
 launchctl load "$IDLE_PLIST_DST"
+
+brew trust domt4/autoupdate
