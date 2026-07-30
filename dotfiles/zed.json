@@ -1,4 +1,7 @@
 {
+  "edit_predictions": {
+    "provider": "zed"
+  },
   "cli_default_open_behavior": "existing_window",
   "project_panel": {
     "dock": "right"
@@ -15,28 +18,14 @@
   "agent_servers": {
     "pi-acp": {
       "default_config_options": {
-        "model": "anthropic/claude-sonnet-4-6"
+        "model": "anthropic/claude-opus-5-0"
       },
       "default_model": "anthropic/claude-sonnet-4-6",
       "type": "custom",
       "command": "pi-acp",
       "env": {
-        "PI_ACP_SHOW_SESSION_ID": true
+        "PI_ACP_SHOW_SESSION_ID": "true"
       }
-    },
-    "claude-acp": {
-      "favorite_config_option_values": {
-        "mode": ["dontAsk"]
-      },
-      "default_config_options": {
-        "model": "sonnet",
-        "mode": "bypassPermissions"
-      },
-      "default_mode": "bypassPermissions",
-      "env": {
-        "ANTHROPIC_MODEL": "sonnet"
-      },
-      "type": "registry"
     }
   },
   "agent": {
@@ -61,9 +50,6 @@
       "provider": "copilot_chat",
       "model": "claude-sonnet-4.6"
     }
-  },
-  "features": {
-    "edit_prediction_provider": "zed"
   },
   "icon_theme": "Material Icon Theme",
   "ui_font_size": 16,
@@ -129,13 +115,7 @@
       "format_on_save": "on",
       "formatter": [
         {
-          "language_server": {
-            "name": "ruff"
-          },
-          "code_actions": {
-            "source.organizeImports.ruff": false,
-            "source.fixAll.ruff": true
-          }
+          "code_action": "source.fixAll.ruff"
         },
         {
           "language_server": {
