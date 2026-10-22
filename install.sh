@@ -48,4 +48,12 @@ sed "s|INSTALL_DIR|$(pwd)|g; s|HOME_DIR|$HOME|g" \
 launchctl unload "$IDLE_PLIST_DST" 2>/dev/null || true
 launchctl load "$IDLE_PLIST_DST"
 
+# Hourly: delete Cargo target/ dirs idle 3+ days, or least recently built while under 200 GB free
+chmod +x "$(pwd)/bin/clean-cargo-targets.sh"
+CARGO_PLIST_DST="$HOME/Library/LaunchAgents/com.theo.clean-cargo-targets.plist"
+sed "s|INSTALL_DIR|$(pwd)|g; s|HOME_DIR|$HOME|g" \
+  "$(pwd)/launchagents/com.theo.clean-cargo-targets.plist" > "$CARGO_PLIST_DST"
+launchctl unload "$CARGO_PLIST_DST" 2>/dev/null || true
+launchctl load "$CARGO_PLIST_DST"
+
 brew trust domt4/autoupdate
