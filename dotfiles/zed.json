@@ -96,7 +96,7 @@
     "svelte": true,
     "catppuccin": true,
     "material-icon-theme": true,
-    "biome": false
+    "biome": true
   },
   "lsp": {
     "protobuf-language-server": {
@@ -113,19 +113,17 @@
     "YAML": {
       "format_on_save": "off"
     },
+    "JavaScript": {
+      "enable_language_server": false
+    },
+    "TypeScript": {
+      "enable_language_server": false
+    },
+    "TSX": {
+      "enable_language_server": false
+    },
     "Python": {
-      "language_servers": ["py", "ruff"],
-      "format_on_save": "on",
-      "formatter": [
-        {
-          "code_action": "source.fixAll.ruff"
-        },
-        {
-          "language_server": {
-            "name": "ruff"
-          }
-        }
-      ]
+      "enable_language_server": false
     }
   }
 }
