@@ -98,6 +98,7 @@
     "material-icon-theme": true,
     "biome": true
   },
+  "enable_language_server": false,
   "lsp": {
     "protobuf-language-server": {
       "binary": {
@@ -109,20 +110,6 @@
   "languages": {
     "YAML": {
       "format_on_save": "off"
-    },
-    "Python": {
-      "language_servers": ["py", "ruff"],
-      "format_on_save": "on",
-      "formatter": [
-        {
-          "code_action": "source.fixAll.ruff"
-        },
-        {
-          "language_server": {
-            "name": "ruff"
-          }
-        }
-      ]
     }
   }
 }
