@@ -96,7 +96,7 @@
     "svelte": true,
     "catppuccin": true,
     "material-icon-theme": true,
-    "biome": true
+    "biome": false
   },
   "lsp": {
     "protobuf-language-server": {
