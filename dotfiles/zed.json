@@ -107,6 +107,9 @@
     }
   },
   "languages": {
+    "Rust": {
+      "enable_language_server": false
+    },
     "YAML": {
       "format_on_save": "off"
     },
